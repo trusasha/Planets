@@ -1,6 +1,12 @@
 import screens from "../../navigation/constants";
 
-const links = [
+interface ILink {
+  name: string;
+  description?: string;
+  route?: typeof screens[keyof typeof screens];
+}
+
+const links: ILink[] = [
   {
     name: 'Урок 1',
     description: 'Мы произвели рендер первого нашего трехмерного элемента',
@@ -8,6 +14,7 @@ const links = [
   },
   {
     name: 'Урок 2',
+    description: 'Мы научились позиционировать трехмерные объекты на сцене',
     route: screens.lesson2,
   },
   {

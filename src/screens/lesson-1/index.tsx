@@ -17,6 +17,7 @@ const Lesson1: FC<TScreenProps<'Lesson 1'>> = () => (
 const styles = StyleSheet.create({
   flex: {
     flex: 1,
+    backgroundColor: 'black',
   },
 });
 

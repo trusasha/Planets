@@ -7,9 +7,25 @@ const Lesson2: FC<TScreenProps<'Lesson 2'>> = () => (
   <Canvas style={styles.flex}>
     <ambientLight/>
     <pointLight position={[10, 10, 10]} />
-    <mesh rotation={[Math.PI / 4, Math.PI / 4, 0]}>
+    <mesh position={[1, 0, 0]} rotation={[Math.PI / 4, Math.PI / 4, 0]}>
       <boxGeometry />
       <meshStandardMaterial color='#FF00FF' />
+    </mesh>
+    <mesh position={[-1, 0, 0]} rotation={[Math.PI / 4, Math.PI / 2, 0]}>
+      <boxGeometry />
+      <meshStandardMaterial color='#FFFF00' />
+    </mesh>
+    <mesh position={[0, 2, 0]} rotation={[Math.PI / 2, Math.PI / 2, 0]}>
+      <boxGeometry />
+      <meshStandardMaterial color='#00FF00' />
+    </mesh>
+    <mesh position={[0, -2, 0]} rotation={[Math.PI / 2, Math.PI / 5, 0]}>
+      <boxGeometry />
+      <meshStandardMaterial color='#FFFFF0' />
+    </mesh>
+    <mesh position={[0, 0, -2]} rotation={[Math.PI / 4, Math.PI / 4, 0]}>
+      <boxGeometry />
+      <meshStandardMaterial color='#00FFFF' />
     </mesh>
   </Canvas>
 );
@@ -17,6 +33,7 @@ const Lesson2: FC<TScreenProps<'Lesson 2'>> = () => (
 const styles = StyleSheet.create({
   flex: {
     flex: 1,
+    backgroundColor: 'black',
   },
 });
 
