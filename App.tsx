@@ -1,12 +1,15 @@
 import {StyleSheet, View} from 'react-native';
 import MainStack from './src/navigation/main';
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 const App = () => (
   <View style={styles.flex}>
-    <NavigationContainer>
-      <MainStack/>
-    </NavigationContainer>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <NavigationContainer>
+        <MainStack />
+      </NavigationContainer>
+    </GestureHandlerRootView>
   </View>
 );
 

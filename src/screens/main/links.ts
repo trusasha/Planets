@@ -23,7 +23,9 @@ const links: ILink[] = [
     route: screens.lesson3,
   },
   {
-    name: 'Урок 4',
+    name: 'Урок 4 (взаимодействие)',
+    description: 'Мы научились взаимодействовать с трехмерными объектами через жесты',
+    route: screens.lesson4,
   },
   {
     name: 'Урок 5',
