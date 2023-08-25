@@ -1,33 +1,42 @@
 import React, {FC, useRef} from 'react';
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import {TScreenProps} from '../../navigation/constants';
 import {Canvas, useFrame} from '@react-three/fiber/native';
 import {BufferGeometry, Material, Mesh, MeshStandardMaterial, NormalBufferAttributes} from 'three';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import {SharedValue, useSharedValue} from 'react-native-reanimated';
 import * as THREE from 'three';
+import animatePositionToInitial from './utils';
+
+const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('screen');
 
 interface ICube {
   isPressed: SharedValue<boolean>;
-  start: SharedValue<{
-    x: number;
-    y: number;
-  }>;
-  offset: SharedValue<{
+  cursor: SharedValue<{
     x: number;
     y: number;
   }>;
 }
 
-const Cube: FC<ICube> = ({isPressed, start, offset}) => {
+const Cube: FC<ICube> = ({isPressed, cursor}) => {
   const mesh = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[]>>(null);
   const material = useRef<MeshStandardMaterial>(null);
 
-  useFrame(() => {
+  useFrame(({camera}) => {
     if (mesh.current) {
-      mesh.current.rotation.z = offset.value.x / 10;
-      mesh.current.rotation.x = offset.value.y / 10;
-      
+      if (!isPressed.value) {
+        cursor.value = {
+          x: animatePositionToInitial(cursor.value.x, 0.01),
+          y: animatePositionToInitial(cursor.value.y, 0.01),
+        }
+      }
+
+      camera.position.x = Math.sin(-cursor.value.x * Math.PI * 2) * 3;
+      camera.position.z = Math.cos(-cursor.value.x * Math.PI * 2) * 3;
+      camera.position.y = -cursor.value.y * 10;
+
+      camera.lookAt(mesh.current.position);
+
       if (material.current) {
         material.current.color = new THREE.Color(isPressed.value ? 'red' : '#FF00FF');
       }
@@ -37,30 +46,23 @@ const Cube: FC<ICube> = ({isPressed, start, offset}) => {
   return (
     <mesh ref={mesh} rotation={[Math.PI / 4, Math.PI / 4, 0]}>
       <boxGeometry />
-      <meshStandardMaterial color="#FF00FF" ref={material}/>
+      <meshStandardMaterial color="#FF00FF" ref={material} />
     </mesh>
   );
 };
 
 const Lesson4: FC<TScreenProps<'Lesson 4'>> = () => {
   const isPressed = useSharedValue(false);
-  const start = useSharedValue({x: 0, y: 0});
-  const offset = useSharedValue({x: 0, y: 0});
+  const cursor = useSharedValue({x: 0, y: 0});
 
   const gesture = Gesture.Pan()
     .onBegin(() => {
       isPressed.value = true;
     })
     .onUpdate((e) => {
-      offset.value = {
-        x: e.translationX + start.value.x,
-        y: e.translationY + start.value.y,
-      };
-    })
-    .onEnd(() => {
-      start.value = {
-        x: offset.value.x,
-        y: offset.value.y,
+      cursor.value = {
+        x: e.absoluteX / SCREEN_WIDTH - 0.5,
+        y: -(e.absoluteY / SCREEN_HEIGHT - 0.5),
       };
     })
     .onFinalize(() => {
@@ -72,7 +74,7 @@ const Lesson4: FC<TScreenProps<'Lesson 4'>> = () => {
       <Canvas style={styles.flex}>
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
-        <Cube isPressed={isPressed} start={start} offset={offset} />
+        <Cube isPressed={isPressed} cursor={cursor} />
       </Canvas>
     </GestureDetector>
   );
