@@ -28,7 +28,8 @@ const links: ILink[] = [
     route: screens.lesson4,
   },
   {
-    name: 'Урок 5',
+    name: 'Урок 5 (текстуры)',
+    route: screens.lesson5,
   },
   {
     name: 'Урок 6',

@@ -1,8 +1,8 @@
 import React, {FC, useRef} from 'react';
 import {Dimensions, StyleSheet} from 'react-native';
 import {TScreenProps} from '../../navigation/constants';
-import {Canvas, useFrame} from '@react-three/fiber/native';
-import {BufferGeometry, Material, Mesh, MeshStandardMaterial, NormalBufferAttributes} from 'three';
+import {Canvas, useFrame, useLoader} from '@react-three/fiber/native';
+import {BufferGeometry, Material, Mesh, NormalBufferAttributes} from 'three';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import {SharedValue, useSharedValue} from 'react-native-reanimated';
 import * as THREE from 'three';
@@ -18,9 +18,28 @@ interface ICube {
   }>;
 }
 
-const Cube: FC<ICube> = ({isPressed, cursor}) => {
+const Door: FC<ICube> = ({isPressed, cursor}) => {
   const mesh = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[]>>(null);
-  const material = useRef<MeshStandardMaterial>(null);
+
+  const [
+    map,
+    alpha,
+    displacementMap,
+    ambientOcclusionTexture,
+    normalTexture,
+    metalnessTexture,
+    roughnessTexture,
+  ] = useLoader(THREE.TextureLoader, [
+    require('./assets/door/color.jpg'),
+    require('./assets/door/alpha.jpg'),
+    require('./assets/door/height.jpg'),
+    require('./assets/door/ambientOcclusion.jpg'),
+    require('./assets/door/normal.jpg'),
+    require('./assets/door/metalness.jpg'),
+    require('./assets/door/roughness.jpg'),
+  ]);
+
+  map.magFilter = THREE.NearestFilter;
 
   useFrame(({camera}) => {
     if (mesh.current) {
@@ -28,30 +47,35 @@ const Cube: FC<ICube> = ({isPressed, cursor}) => {
         cursor.value = {
           x: animateValueToZero(cursor.value.x, 0.01),
           y: animateValueToZero(cursor.value.y, 0.01),
-        }
+        };
       }
 
-      camera.position.x = Math.sin(-cursor.value.x * Math.PI * 2) * 3;
-      camera.position.z = Math.cos(-cursor.value.x * Math.PI * 2) * 3;
+      camera.position.x = Math.sin(-cursor.value.x * Math.PI * 2) * 2;
+      camera.position.z = Math.cos(-cursor.value.x * Math.PI * 2) * 2;
       camera.position.y = -cursor.value.y * 10;
 
       camera.lookAt(mesh.current.position);
-
-      if (material.current) {
-        material.current.color = new THREE.Color(isPressed.value ? 'red' : '#FF00FF');
-      }
     }
   });
 
   return (
-    <mesh ref={mesh} rotation={[Math.PI / 4, Math.PI / 4, 0]}>
-      <boxGeometry />
-      <meshStandardMaterial color="#FF00FF" ref={material} />
+    <mesh ref={mesh}>
+      <boxGeometry args={[1, 1]}/>
+      <meshStandardMaterial
+        map={map}
+        alphaMap={alpha}
+        displacementMap={displacementMap}
+        aoMap={ambientOcclusionTexture}
+        normalMap={normalTexture}
+        metalnessMap={metalnessTexture}
+        roughnessMap={roughnessTexture}
+        displacementScale={0.5}
+      />
     </mesh>
   );
 };
 
-const Lesson4: FC<TScreenProps<'Lesson 4'>> = () => {
+const Lesson5: FC<TScreenProps<'Lesson 5'>> = () => {
   const isPressed = useSharedValue(false);
   const cursor = useSharedValue({x: 0, y: 0});
 
@@ -73,8 +97,9 @@ const Lesson4: FC<TScreenProps<'Lesson 4'>> = () => {
     <GestureDetector gesture={gesture}>
       <Canvas style={styles.flex}>
         <ambientLight />
-        <pointLight position={[10, 10, 10]} />
-        <Cube isPressed={isPressed} cursor={cursor} />
+        <pointLight position={[2, 3, 4]} />
+        <ambientLight />
+        <Door isPressed={isPressed} cursor={cursor} />
       </Canvas>
     </GestureDetector>
   );
@@ -87,4 +112,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Lesson4;
+export default Lesson5;
