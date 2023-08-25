@@ -29,6 +29,7 @@ const links: ILink[] = [
   },
   {
     name: 'Урок 5 (текстуры)',
+    description: 'Мы научились загружать и редактировать текстуры',
     route: screens.lesson5,
   },
   {
