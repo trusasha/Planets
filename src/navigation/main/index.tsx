@@ -7,6 +7,7 @@ import Lesson2 from '../../screens/lesson-2';
 import Lesson3 from '../../screens/lesson-3';
 import Lesson4 from '../../screens/lesson-4';
 import Lesson5 from '../../screens/lesson-5';
+import Lesson6 from '../../screens/lesson-6';
 
 const Stack = createNativeStackNavigator<TScreensParams>();
 
@@ -18,6 +19,7 @@ const MainStack = () => (
     <Stack.Screen name={screens.lesson3} component={Lesson3} />
     <Stack.Screen name={screens.lesson4} component={Lesson4} />
     <Stack.Screen name={screens.lesson5} component={Lesson5} />
+    <Stack.Screen name={screens.lesson6} component={Lesson6} />
   </Stack.Navigator>
 );
 

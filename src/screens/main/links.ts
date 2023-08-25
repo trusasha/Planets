@@ -34,6 +34,7 @@ const links: ILink[] = [
   },
   {
     name: 'Урок 6',
+    route: screens.lesson6,
   },
 ];
 

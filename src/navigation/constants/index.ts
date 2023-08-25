@@ -7,6 +7,7 @@ const screens = {
   lesson3: 'Lesson 3',
   lesson4: 'Lesson 4',
   lesson5: 'Lesson 5',
+  lesson6: 'Lesson 6',
 } as const
 
 export type TScreensParams = {
@@ -16,6 +17,7 @@ export type TScreensParams = {
   'Lesson 3': undefined;
   'Lesson 4': undefined;
   'Lesson 5': undefined;
+  'Lesson 6': undefined;
 }
 
 export type TScreenProps<T extends keyof TScreensParams> = NativeStackScreenProps<
