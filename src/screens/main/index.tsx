@@ -1,12 +1,14 @@
 import React, {FC} from 'react';
-import {FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {SafeAreaView, SectionList, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {TScreenProps} from '../../navigation/constants';
 import links from './links';
 
 const Main: FC<TScreenProps<'Main'>> = ({navigation: {navigate}}) => (
   <SafeAreaView>
-    <FlatList
-      data={links}
+    <SectionList
+      sections={links}
+      stickySectionHeadersEnabled={false}
+      renderSectionHeader={({section: {title}}) => <Text style={styles.sectionHeader}>{title}</Text>}
       renderItem={({item: {name, route, description}}) => (
         <TouchableOpacity style={[styles.item, !route && styles.itemDisabled]} disabled={!route} onPress={() => route && navigate(route)}>
           <Text style={styles.itemText}>{name}</Text>
@@ -37,6 +39,11 @@ const styles = StyleSheet.create({
   content: {
     paddingVertical: 24,
     paddingHorizontal: 16,
+  },
+  sectionHeader: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginVertical: 12,
   },
 });
 
