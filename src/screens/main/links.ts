@@ -54,7 +54,8 @@ const links: ILinkSection[] = [
     key: 'base-technics',
     data: [
       {
-        name: 'Урок 7',
+        name: 'Урок 7 (источники света)',
+        description: 'Мы попробовали использовать различные источники света',
         route: screens.lesson7,
       },
       {

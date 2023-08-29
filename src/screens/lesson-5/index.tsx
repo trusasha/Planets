@@ -96,7 +96,6 @@ const Lesson5: FC<TScreenProps<'Lesson 5'>> = () => {
   return (
     <GestureDetector gesture={gesture}>
       <Canvas style={styles.flex}>
-        <ambientLight />
         <pointLight position={[2, 3, 4]} />
         <ambientLight />
         <Door isPressed={isPressed} cursor={cursor} />
