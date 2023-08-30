@@ -59,7 +59,8 @@ const links: ILinkSection[] = [
         route: screens.lesson7,
       },
       {
-        name: 'Урок 8',
+        name: 'Урок 8 (тени)',
+        route: screens.lesson8,
       },
       {
         name: 'Урок 9',
