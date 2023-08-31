@@ -13,8 +13,6 @@ const Scene: FC<IScene> = ({moveCamera}) => {
   const rectAreaLightRef = useRef<THREE.RectAreaLight>(null);
   const directionalLightRef = useRef<THREE.DirectionalLight>(null);
 
-  useThree(({}) => {});
-
   useFrame(({camera}) => {
     moveCamera(camera, mesh.current?.getPosition());
   });

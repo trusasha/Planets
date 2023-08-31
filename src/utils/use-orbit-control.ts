@@ -13,7 +13,7 @@ export interface IOrbitControl {
 /**
  * Simple orbit controller
  */
-const useOrbitControl = (): IOrbitControl => {
+const useOrbitControl = (zoom = 6): IOrbitControl => {
   const isPressed = useSharedValue(false);
   const cursor = useSharedValue({ x: 0, y: 0 });
   const accumulator = useSharedValue({ x: 0, y: 0 });
@@ -42,8 +42,8 @@ const useOrbitControl = (): IOrbitControl => {
       return;
     }
 
-    camera.position.x = Math.sin(-cursor.value.x * Math.PI * 2) * 6;
-    camera.position.z = Math.cos(-cursor.value.x * Math.PI * 2) * 6;
+    camera.position.x = Math.sin(-cursor.value.x * Math.PI * 2) * zoom;
+    camera.position.z = Math.cos(-cursor.value.x * Math.PI * 2) * zoom;
     camera.position.y = -cursor.value.y * 10;
 
     camera.lookAt(meshPosition);
