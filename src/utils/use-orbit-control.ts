@@ -44,7 +44,7 @@ const useOrbitControl = (zoom = 6): IOrbitControl => {
 
     camera.position.x = Math.sin(-cursor.value.x * Math.PI * 2) * zoom;
     camera.position.z = Math.cos(-cursor.value.x * Math.PI * 2) * zoom;
-    camera.position.y = -cursor.value.y * 10;
+    camera.position.y = 2 + -cursor.value.y * 10;
 
     camera.lookAt(meshPosition);
   }

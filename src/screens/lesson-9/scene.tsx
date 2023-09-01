@@ -1,26 +1,13 @@
 import React, {FC, useRef} from 'react';
-import {useFrame, useThree} from '@react-three/fiber/native';
+import {useThree} from '@react-three/fiber/native';
 import * as THREE from 'three';
-import {IOrbitControl} from '../../utils/use-orbit-control';
 import House from './house';
 import Graves from './graves';
 import Floor, {IFloorRef} from './floor';
 import Ghosts from './ghosts';
 
-interface IScene {
-  moveCamera: IOrbitControl['moveCamera'];
-}
-
-const Scene: FC<IScene> = ({moveCamera}) => {
+const Scene: FC = () => {
   const mesh = useRef<IFloorRef>(null);
-
-  useFrame(({camera}) => {
-    const meshPosition = mesh.current?.getPosition();
-
-    if (meshPosition) {
-      moveCamera(camera, meshPosition);
-    }
-  });
 
   useThree(({scene}) => {
     scene.fog = new THREE.Fog('#262837', 1, 23);
