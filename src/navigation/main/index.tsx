@@ -1,6 +1,6 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import screens, { TScreensParams } from '../constants';
+import screens, {TScreensParams} from '../constants';
 import Main from '../../screens/main';
 import Lesson1 from '../../screens/lesson-1';
 import Lesson2 from '../../screens/lesson-2';
@@ -12,6 +12,7 @@ import Lesson7 from '../../screens/lesson-7';
 import Lesson8 from '../../screens/lesson-8';
 import Lesson9 from '../../screens/lesson-9';
 import Lesson10 from '../../screens/lesson-10';
+import Lesson11 from '../../screens/lesson-11';
 
 const Stack = createNativeStackNavigator<TScreensParams>();
 
@@ -28,6 +29,7 @@ const MainStack = () => (
     <Stack.Screen name={screens.lesson8} component={Lesson8} />
     <Stack.Screen name={screens.lesson9} component={Lesson9} />
     <Stack.Screen name={screens.lesson10} component={Lesson10} />
+    <Stack.Screen name={screens.lesson11} component={Lesson11} />
   </Stack.Navigator>
 );
 
