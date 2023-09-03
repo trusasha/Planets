@@ -1,24 +1,21 @@
-import React, {FC} from 'react';
+import React, {FC, Suspense} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {TScreenProps} from '../../navigation/constants';
 import {Canvas} from '@react-three/fiber/native';
 import Scene from './scene';
 import useControls from 'r3f-native-orbitcontrols';
-import {PerspectiveCamera} from 'three';
 
-const Lesson9: FC<TScreenProps<'Lesson 9'>> = () => {
+const Lesson10: FC<TScreenProps<'Lesson 10'>> = () => {
   const [OrbitControls, events] = useControls();
-
-  const camera = new PerspectiveCamera();
-
-  camera.position.set(5, 5, 15);
 
   return (
     <View style={styles.flex} {...events}>
-      <Canvas shadows style={styles.flex} camera={camera}>
-        <OrbitControls />
-        <Scene />
-      </Canvas>
+      <Suspense fallback={null}>
+        <Canvas style={styles.flex}>
+          <OrbitControls />
+          <Scene />
+        </Canvas>
+      </Suspense>
     </View>
   );
 };
@@ -26,8 +23,8 @@ const Lesson9: FC<TScreenProps<'Lesson 9'>> = () => {
 const styles = StyleSheet.create({
   flex: {
     flex: 1,
-    backgroundColor: '#262837',
+    backgroundColor: 'black',
   },
 });
 
-export default Lesson9;
+export default Lesson10;
