@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useRef} from 'react';
-import {useFrame, useLoader} from '@react-three/fiber/native';
+import {useFrame} from '@react-three/fiber/native';
 import {BufferGeometry, Material, Mesh, MeshStandardMaterial, NormalBufferAttributes} from 'three';
 import {SharedValue} from 'react-native-reanimated';
 import * as THREE from 'three';
@@ -7,6 +7,7 @@ import animateValueToZero from '../../utils/animate-value-to-zero';
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry';
 import {FontLoader} from 'three/examples/jsm/loaders/FontLoader';
 import fontAsset from './assets/fonts/helvetiker_regular.typeface.json';
+import {TextureLoader} from 'expo-three';
 
 interface IText {
   isPressed: SharedValue<boolean>;
@@ -23,11 +24,7 @@ const Text: FC<IText> = ({isPressed, cursor}) => {
 
   const font = new FontLoader().parse(fontAsset);
 
-  const [matcap] = useLoader(THREE.TextureLoader, [require('./assets/textures/matcaps/8.png')], undefined, ({loaded, total}) => {
-    if (loaded === total) {
-
-    }
-  })
+  const matcap = new TextureLoader().load(require('./assets/textures/matcaps/8.png'));
 
   useFrame(({camera}) => {
     if (mesh.current) {

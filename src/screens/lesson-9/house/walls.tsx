@@ -1,21 +1,22 @@
-import {useLoader, useThree} from '@react-three/fiber/native';
-import React, { useRef } from 'react';
+import {useThree} from '@react-three/fiber/native';
+import React, {useRef} from 'react';
 import {BufferGeometry, Material, Mesh, NormalBufferAttributes} from 'three';
 import * as THREE from 'three';
+import {TextureLoader} from 'expo-three';
 
 const Walls = () => {
   const mesh = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[]>>(null);
 
-  const [map, aoMap, normalMap, roughnessMap] = useLoader(THREE.TextureLoader, [
-    require('../assets/textures/bricks/color.jpg'),
-    require('../assets/textures/bricks/ambient-occlusion.jpg'),
-    require('../assets/textures/bricks/normal.jpg'),
-    require('../assets/textures/bricks/roughness.jpg'),
-  ]);
+  const map = new TextureLoader().load(require('../assets/textures/bricks/color.jpg'));
+  const aoMap = new TextureLoader().load(
+    require('../assets/textures/bricks/ambient-occlusion.jpg')
+  );
+  const normalMap = new TextureLoader().load(require('../assets/textures/bricks/normal.jpg'));
+  const roughnessMap = new TextureLoader().load(require('../assets/textures/bricks/roughness.jpg'));
 
   useThree(() => {
     if (mesh.current) {
-     /**
+      /**
        * We need to add this for supporting aoMap, after 0.151 of three js we don't need to provide this part
        */
       mesh.current.geometry.setAttribute(

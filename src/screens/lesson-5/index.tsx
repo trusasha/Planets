@@ -1,12 +1,13 @@
 import React, {FC, useRef} from 'react';
 import {Dimensions, StyleSheet} from 'react-native';
 import {TScreenProps} from '../../navigation/constants';
-import {Canvas, useFrame, useLoader} from '@react-three/fiber/native';
+import {Canvas, useFrame} from '@react-three/fiber/native';
 import {BufferGeometry, Material, Mesh, NormalBufferAttributes} from 'three';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import {SharedValue, useSharedValue} from 'react-native-reanimated';
 import * as THREE from 'three';
 import animateValueToZero from '../../utils/animate-value-to-zero';
+import {TextureLoader} from 'expo-three';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('screen');
 
@@ -21,23 +22,15 @@ interface ICube {
 const Door: FC<ICube> = ({isPressed, cursor}) => {
   const mesh = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[]>>(null);
 
-  const [
-    map,
-    alpha,
-    displacementMap,
-    ambientOcclusionTexture,
-    normalTexture,
-    metalnessTexture,
-    roughnessTexture,
-  ] = useLoader(THREE.TextureLoader, [
-    require('./assets/door/color.jpg'),
-    require('./assets/door/alpha.jpg'),
-    require('./assets/door/height.jpg'),
-    require('./assets/door/ambientOcclusion.jpg'),
-    require('./assets/door/normal.jpg'),
-    require('./assets/door/metalness.jpg'),
-    require('./assets/door/roughness.jpg'),
-  ]);
+  const map = new TextureLoader().load(require('./assets/door/color.jpg'));
+  const alpha = new TextureLoader().load(require('./assets/door/alpha.jpg'));
+  const displacementMap = new TextureLoader().load(require('./assets/door/height.jpg'));
+  const ambientOcclusionTexture = new TextureLoader().load(
+    require('./assets/door/ambientOcclusion.jpg')
+  );
+  const normalTexture = new TextureLoader().load(require('./assets/door/normal.jpg'));
+  const metalnessTexture = new TextureLoader().load(require('./assets/door/metalness.jpg'));
+  const roughnessTexture = new TextureLoader().load(require('./assets/door/roughness.jpg'));
 
   map.magFilter = THREE.NearestFilter;
 
@@ -60,7 +53,7 @@ const Door: FC<ICube> = ({isPressed, cursor}) => {
 
   return (
     <mesh ref={mesh}>
-      <boxGeometry args={[1, 1]}/>
+      <boxGeometry args={[1, 1]} />
       <meshStandardMaterial
         map={map}
         alphaMap={alpha}

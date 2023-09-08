@@ -1,5 +1,6 @@
 import React, {FC, useRef} from 'react';
-import {useFrame, useLoader, useThree} from '@react-three/fiber/native';
+import {useFrame, useThree} from '@react-three/fiber/native';
+import {TextureLoader} from 'expo-three';
 import * as THREE from 'three';
 
 const count = 20000;
@@ -14,7 +15,7 @@ const Cloud: FC = () => {
       >
     >(null);
 
-  const [map] = useLoader(THREE.TextureLoader, [require('../assets/textures/5.png')]);
+  const map = new TextureLoader().load(require('../assets/textures/5.png'));
 
   useFrame(({clock}) => {
     /**

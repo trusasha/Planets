@@ -1,7 +1,8 @@
-import {useLoader, useThree} from '@react-three/fiber/native';
+import {useThree} from '@react-three/fiber/native';
 import React, {forwardRef, useEffect, useImperativeHandle, useRef} from 'react';
 import {BufferGeometry, Material, Mesh, NormalBufferAttributes} from 'three';
 import * as THREE from 'three';
+import {TextureLoader} from 'expo-three';
 
 export interface IFloorRef {
   getPosition: () => THREE.Vector3 | undefined;
@@ -10,12 +11,12 @@ export interface IFloorRef {
 const Floor = forwardRef<IFloorRef>((props, ref) => {
   const mesh = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[]>>(null);
 
-  const [map, aoMap, normalMap, roughnessMap] = useLoader(THREE.TextureLoader, [
-    require('../assets/textures/grass/color.jpg'),
-    require('../assets/textures/grass/ambient-occlusion.jpg'),
-    require('../assets/textures/grass/normal.jpg'),
-    require('../assets/textures/grass/roughness.jpg'),
-  ]);
+  const map = new TextureLoader().load(require('../assets/textures/grass/color.jpg'));
+  const aoMap = new TextureLoader().load(
+    require('../assets/textures/grass/ambient-occlusion.jpg')
+  );
+  const normalMap = new TextureLoader().load(require('../assets/textures/grass/normal.jpg'));
+  const roughnessMap = new TextureLoader().load(require('../assets/textures/grass/roughness.jpg'));
 
   useThree(() => {
     if (mesh.current) {
