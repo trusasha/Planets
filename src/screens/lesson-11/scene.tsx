@@ -2,10 +2,14 @@ import React, {FC, useRef} from 'react';
 import {useFrame, useLoader, useThree} from '@react-three/fiber/native';
 import * as THREE from 'three';
 import { SharedValue } from 'react-native-reanimated';
-import { CONTENT_HEIGHT } from '.';
 import { gsap } from 'gsap';
+import { Dimensions } from 'react-native';
 
 const objectDistance = 4;
+
+const {height: SCREEN_HEIGHT} = Dimensions.get('screen');
+
+export const CONTENT_HEIGHT = SCREEN_HEIGHT - 100;
 
 interface IScene {
   scrollY: SharedValue<number>

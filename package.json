@@ -12,6 +12,7 @@
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
     "@react-three/fiber": "^8.11.5",
+    "cannon": "^0.6.2",
     "expo": "~49.0.8",
     "expo-file-system": "~15.4.3",
     "expo-gl": "^12.4.0",
@@ -25,10 +26,12 @@
     "react-native-reanimated": "^3.3.0",
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
-    "three": "^0.149.0"
+    "three": "^0.149.0",
+    "expo-av": "~13.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@types/cannon": "^0.1.10",
     "@types/react": "~18.0.14",
     "@types/three": "^0.155.1",
     "typescript": "^5.1.3"

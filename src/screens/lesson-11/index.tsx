@@ -2,13 +2,11 @@ import React, {FC, Suspense} from 'react';
 import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import {TScreenProps} from '../../navigation/constants';
 import {Canvas} from '@react-three/fiber/native';
-import Scene from './scene';
+import Scene, { CONTENT_HEIGHT } from './scene';
 import * as THREE from 'three';
 import Animated, {useAnimatedScrollHandler, useSharedValue} from 'react-native-reanimated';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('screen');
-
-export const CONTENT_HEIGHT = SCREEN_HEIGHT - 100;
 
 const Lesson11: FC<TScreenProps<'Lesson 11'>> = () => {
   const camera = new THREE.PerspectiveCamera(35, SCREEN_WIDTH / SCREEN_HEIGHT, 0.1, 100);

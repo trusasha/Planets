@@ -3,6 +3,7 @@ import MainStack from './src/navigation/main';
 import {NavigationContainer} from '@react-navigation/native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {useEffect} from 'react';
+import {StatusBar} from 'expo-status-bar';
 
 const App = () => {
   useEffect(() => {
@@ -16,6 +17,7 @@ const App = () => {
           <MainStack />
         </NavigationContainer>
       </GestureHandlerRootView>
+      <StatusBar style="dark" />
     </View>
   );
 };

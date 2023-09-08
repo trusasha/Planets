@@ -79,6 +79,17 @@ const links: ILinkSection[] = [
         route: screens.lesson11,
       }
     ]
+  },
+  {
+    title: 'Продвинутые техники',
+    key: 'advanced-technics',
+    data: [
+      {
+        name: 'Урок 12 (физика)',
+        description: 'Мы попробовали использовать различные источники света',
+        route: screens.lesson12,
+      },
+    ]
   }
 ];
 
