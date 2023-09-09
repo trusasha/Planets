@@ -89,6 +89,11 @@ const links: ILinkSection[] = [
         description: 'Мы попробовали использовать различные источники света',
         route: screens.lesson12,
       },
+      {
+        name: 'Урок 13 (импортирование моделей)',
+        description: 'Мы попробовали использовать различные источники света',
+        route: screens.lesson13,
+      },
     ]
   }
 ];
