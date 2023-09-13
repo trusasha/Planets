@@ -3,11 +3,11 @@ import {useFrame} from '@react-three/fiber/native';
 import {BufferGeometry, Material, Mesh, MeshStandardMaterial, NormalBufferAttributes} from 'three';
 import {SharedValue} from 'react-native-reanimated';
 import * as THREE from 'three';
-import animateValueToZero from '../../utils/animate-value-to-zero';
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry';
 import {FontLoader} from 'three/examples/jsm/loaders/FontLoader';
 import fontAsset from './assets/fonts/helvetiker_regular.typeface.json';
 import {TextureLoader} from 'expo-three';
+import animateValueToZero from '@utils/animate-value-to-zero';
 
 interface IText {
   isPressed: SharedValue<boolean>;
@@ -48,8 +48,8 @@ const Text: FC<IText> = ({isPressed, cursor}) => {
   });
 
   useEffect(() => {
-    textRef.current?.center()
-  }, [])
+    textRef.current?.center();
+  }, []);
 
   return (
     <mesh ref={mesh}>
@@ -60,4 +60,4 @@ const Text: FC<IText> = ({isPressed, cursor}) => {
   );
 };
 
-export default Text
+export default Text;

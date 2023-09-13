@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {StyleSheet} from 'react-native';
-import {TScreenProps} from '../../navigation/constants';
+import {TScreenProps} from '@navigation/constants';
 import {Canvas} from '@react-three/fiber';
 
 const Lesson2: FC<TScreenProps<'Lesson 2'>> = () => (

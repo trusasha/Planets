@@ -1,6 +1,6 @@
 import React, {FC, useRef} from 'react';
 import {StyleSheet} from 'react-native';
-import {TScreenProps} from '../../navigation/constants';
+import {TScreenProps} from '@navigation/constants';
 import {Canvas, useFrame, useThree} from '@react-three/fiber/native';
 import {BufferGeometry, Material, Mesh, NormalBufferAttributes} from 'three';
 import * as THREE from 'three';
@@ -14,7 +14,7 @@ const Cube = () => {
   useThree(({camera}) => {
     camera.position.set(1, 1, 5);
     camera.rotation.set(THREE.MathUtils.degToRad(0), 0, 0);
-  })
+  });
 
   /**
    * Hook which is used to create an animation loop that updates the

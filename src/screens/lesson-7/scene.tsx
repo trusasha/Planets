@@ -1,9 +1,9 @@
 import React, {FC, useEffect, useRef} from 'react';
 import {useFrame} from '@react-three/fiber/native';
 import {SharedValue} from 'react-native-reanimated';
-import animateValueToZero from '../../utils/animate-value-to-zero';
 import Object, {IObjectRef} from './object';
 import * as THREE from 'three';
+import animateValueToZero from '@utils/animate-value-to-zero';
 
 interface IScene {
   isPressed: SharedValue<boolean>;

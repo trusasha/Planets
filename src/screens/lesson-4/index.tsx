@@ -1,12 +1,12 @@
 import React, {FC, useRef} from 'react';
 import {Dimensions, StyleSheet} from 'react-native';
-import {TScreenProps} from '../../navigation/constants';
+import {TScreenProps} from '@navigation/constants';
 import {Canvas, useFrame} from '@react-three/fiber/native';
 import {BufferGeometry, Material, Mesh, MeshStandardMaterial, NormalBufferAttributes} from 'three';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import {SharedValue, useSharedValue} from 'react-native-reanimated';
 import * as THREE from 'three';
-import animateValueToZero from '../../utils/animate-value-to-zero';
+import animateValueToZero from '@utils/animate-value-to-zero';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('screen');
 
@@ -28,7 +28,7 @@ const Cube: FC<ICube> = ({isPressed, cursor}) => {
         cursor.value = {
           x: animateValueToZero(cursor.value.x, 0.01),
           y: animateValueToZero(cursor.value.y, 0.01),
-        }
+        };
       }
 
       camera.position.x = Math.sin(-cursor.value.x * Math.PI * 2) * 3;

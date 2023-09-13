@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Dimensions, StyleSheet} from 'react-native';
-import {TScreenProps} from '../../navigation/constants';
+import {TScreenProps} from '@navigation/constants';
 import {Canvas, extend, Object3DNode} from '@react-three/fiber/native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import {useSharedValue} from 'react-native-reanimated';
@@ -42,7 +42,9 @@ const Lesson6: FC<TScreenProps<'Lesson 6'>> = () => {
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
         <Text isPressed={isPressed} cursor={cursor} />
-        {Array.from({length: 100}).map((_, index) => <Donut key={index} />)}
+        {Array.from({length: 100}).map((_, index) => (
+          <Donut key={index} />
+        ))}
       </Canvas>
     </GestureDetector>
   );

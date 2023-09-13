@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {TScreenProps} from '../../navigation/constants';
+import {TScreenProps} from '@navigation/constants';
 import {Canvas} from '@react-three/fiber/native';
 import Scene from './scene';
 import useControls from 'r3f-native-orbitcontrols';

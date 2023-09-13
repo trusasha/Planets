@@ -1,4 +1,4 @@
-import screens from "../../navigation/constants";
+import screens from "@navigation/constants";
 
 interface ILinkSection {
   title: string;

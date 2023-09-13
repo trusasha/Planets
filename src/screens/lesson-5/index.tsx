@@ -1,13 +1,13 @@
 import React, {FC, useRef} from 'react';
 import {Dimensions, StyleSheet} from 'react-native';
-import {TScreenProps} from '../../navigation/constants';
+import {TScreenProps} from '@navigation/constants';
 import {Canvas, useFrame} from '@react-three/fiber/native';
 import {BufferGeometry, Material, Mesh, NormalBufferAttributes} from 'three';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import {SharedValue, useSharedValue} from 'react-native-reanimated';
 import * as THREE from 'three';
-import animateValueToZero from '../../utils/animate-value-to-zero';
 import {TextureLoader} from 'expo-three';
+import animateValueToZero from '@utils/animate-value-to-zero';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('screen');
 

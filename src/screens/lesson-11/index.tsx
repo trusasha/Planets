@@ -1,8 +1,8 @@
 import React, {FC, Suspense} from 'react';
 import {Dimensions, StyleSheet, Text, View} from 'react-native';
-import {TScreenProps} from '../../navigation/constants';
+import {TScreenProps} from '@navigation/constants';
 import {Canvas} from '@react-three/fiber/native';
-import Scene, { CONTENT_HEIGHT } from './scene';
+import Scene, {CONTENT_HEIGHT} from './scene';
 import * as THREE from 'three';
 import Animated, {useAnimatedScrollHandler, useSharedValue} from 'react-native-reanimated';
 

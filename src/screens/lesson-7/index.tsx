@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Dimensions, StyleSheet} from 'react-native';
-import {TScreenProps} from '../../navigation/constants';
+import {TScreenProps} from '@navigation/constants';
 import {Canvas} from '@react-three/fiber/native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import {useSharedValue} from 'react-native-reanimated';

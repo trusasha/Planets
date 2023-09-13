@@ -2,8 +2,8 @@ import {useThree} from '@react-three/fiber/native';
 import React, {useRef} from 'react';
 import * as THREE from 'three';
 import {BufferGeometry, Material, Mesh, NormalBufferAttributes} from 'three';
-import withCentimeter from '../../../helpers/with-santimeter';
 import {TextureLoader} from 'expo-three';
+import withCentimeter from '@helpers/with-centimeter';
 
 const Door = () => {
   const mesh = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[]>>(null);
