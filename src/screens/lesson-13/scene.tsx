@@ -9,8 +9,8 @@ const Scene: FC = () => {
       <ambientLight intensity={1} />
       <directionalLight position={[1, 1, 0]} intensity={1} />
 
-      {/* <BurgerOBJ /> */}
-      <DuckGLB />
+      <BurgerOBJ />
+      {/* <DuckGLB /> */}
       {/* <ShoeOBJ /> */}
     </>
   );

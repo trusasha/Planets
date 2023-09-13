@@ -1,18 +1,19 @@
 import React from 'react';
-import {OBJLoader} from 'three/examples/jsm/loaders/OBJLoader';
-import {MTLLoader} from 'three/examples/jsm/loaders/MTLLoader';
-import {useLoader} from '@react-three/fiber/native';
+import useObjLoader from '../../../utils/use-obj-loader';
 
 const BurgerOBJ = () => {
-  const [material] = useLoader(MTLLoader, [require('../assets/models/burger/burger.mtl')]);
-  const [obj] = useLoader(OBJLoader, [require('../assets/models/burger/burger.obj')], (loader) => {
-    material.preload();
-    loader.setMaterials(material);
-  });
+  const [burgerGroup] = useObjLoader(
+    require('../assets/models/burger/burger.obj'),
+    require('../assets/models/burger/burger.mtl')
+  );
+
+  if (!burgerGroup) {
+    return null;
+  }
 
   return (
     <mesh>
-      <primitive object={obj} />
+      <primitive object={burgerGroup} />
     </mesh>
   );
 };
