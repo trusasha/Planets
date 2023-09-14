@@ -1,19 +1,17 @@
 import React from 'react';
-import useObjLoader from '../../../utils/use-obj-loader';
+import useModelLoader from '@hooks/use-model-loader';
+import burgerObj from '../assets/models/burger';
 
 const BurgerOBJ = () => {
-  const [burgerGroup] = useObjLoader(
-    require('../assets/models/burger/burger.obj'),
-    require('../assets/models/burger/burger.mtl')
-  );
+  const [group] = useModelLoader(burgerObj)
 
-  if (!burgerGroup) {
+  if (!group) {
     return null;
   }
 
   return (
     <mesh>
-      <primitive object={burgerGroup} />
+      <primitive object={group} />
     </mesh>
   );
 };

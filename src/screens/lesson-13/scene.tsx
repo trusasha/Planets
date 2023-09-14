@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import ShoeOBJ from './shoe';
 import DuckGLB from './duck';
 import BurgerOBJ from './burger';
+import IcebearGLB from './icebear';
 
 const Scene: FC = () => {
   return (
@@ -12,6 +13,7 @@ const Scene: FC = () => {
       <BurgerOBJ />
       {/* <DuckGLB /> */}
       {/* <ShoeOBJ /> */}
+      {/* <IcebearGLB /> */}
     </>
   );
 };

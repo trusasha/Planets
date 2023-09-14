@@ -4,7 +4,7 @@ import {TScreenProps} from '@navigation/constants';
 import {Canvas} from '@react-three/fiber/native';
 import {GestureDetector} from 'react-native-gesture-handler';
 import Scene from './scene';
-import useOrbitControl from '@utils/use-orbit-control';
+import useOrbitControl from '@hooks/use-orbit-control';
 
 const Lesson8: FC<TScreenProps<'Lesson 8'>> = () => {
   const {gesture, moveCamera} = useOrbitControl();

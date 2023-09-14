@@ -1,3 +1,4 @@
+import React from 'react';
 import {LogBox, StyleSheet, View} from 'react-native';
 import MainStack from './src/navigation/main';
 import {NavigationContainer} from '@react-navigation/native';

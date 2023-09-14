@@ -2,7 +2,7 @@ import React, {FC, useEffect, useRef} from 'react';
 import {useFrame} from '@react-three/fiber/native';
 import Object, {IObjectRef} from './object';
 import * as THREE from 'three';
-import {IOrbitControl} from '@utils/use-orbit-control';
+import {IOrbitControl} from '@hooks/use-orbit-control';
 
 interface IScene {
   moveCamera: IOrbitControl['moveCamera'];
