@@ -7,6 +7,9 @@ interface IButton {
   additionalStyles?: TouchableOpacityProps['style'];
 }
 
+/**
+ * Common button component
+ */
 const Button: FC<IButton> = ({title, onPress, additionalStyles}) => (
   <TouchableOpacity onPress={onPress} style={[styles.button, additionalStyles]}>
     <Text style={styles.buttonText}>{title}</Text>
