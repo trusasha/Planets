@@ -99,6 +99,11 @@ const links: ILinkSection[] = [
         description: 'Попробовали создать свой собственный шейдер',
         route: screens.lesson14,
       },
+      {
+        name: 'Урок 15 (шейдеры)',
+        description: 'Попробовали создать свой собственный шейдер',
+        route: screens.lesson15,
+      },
     ]
   }
 ];
