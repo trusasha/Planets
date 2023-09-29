@@ -1,8 +1,14 @@
 import screens from "@navigation/constants";
 
-interface ILinkSection {
+export enum LinkCardKey {
+  base = 'base',
+  baseTechnics = 'base-technics',
+  advancedTechnics = 'advanced-technics',
+}
+
+export interface ILinkCard {
   title: string;
-  key: string;
+  key: LinkCardKey;
   data: ILink[];
 }
 
@@ -12,10 +18,10 @@ interface ILink {
   route?: typeof screens[keyof typeof screens];
 }
 
-const links: ILinkSection[] = [
+const links: ILinkCard[] = [
   {
     title: 'Основы',
-    key: 'base',
+    key: LinkCardKey.base,
     data: [
       {
         name: 'Урок 1 (введение)',
@@ -51,7 +57,7 @@ const links: ILinkSection[] = [
   },
   {
     title: 'Основные техники',
-    key: 'base-technics',
+    key: LinkCardKey.baseTechnics,
     data: [
       {
         name: 'Урок 7 (источники света)',
@@ -82,7 +88,7 @@ const links: ILinkSection[] = [
   },
   {
     title: 'Продвинутые техники',
-    key: 'advanced-technics',
+    key: LinkCardKey.advancedTechnics,
     data: [
       {
         name: 'Урок 12 (физика)',

@@ -2,31 +2,23 @@ import React, {FC} from 'react';
 import {SafeAreaView, SectionList, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {TScreenProps} from '@navigation/constants';
 import links from './links';
+import Carousel from '@components/carousel';
+import colors from '@constants/colors';
 
 const Main: FC<TScreenProps<'Main'>> = ({navigation: {navigate}}) => (
-  <SafeAreaView>
-    <SectionList
-      sections={links}
-      stickySectionHeadersEnabled={false}
-      renderSectionHeader={({section: {title}}) => (
-        <Text style={styles.sectionHeader}>{title}</Text>
-      )}
-      renderItem={({item: {name, route, description}}) => (
-        <TouchableOpacity
-          style={[styles.item, !route && styles.itemDisabled]}
-          disabled={!route}
-          onPress={() => route && navigate(route)}
-        >
-          <Text style={styles.itemText}>{name}</Text>
-          {description && <Text>{description}</Text>}
-        </TouchableOpacity>
-      )}
-      contentContainerStyle={styles.content}
-    />
+  <SafeAreaView style={styles.container}>
+    <Carousel data={links} additionalContainerStyles={styles.carouselContent} />
   </SafeAreaView>
 );
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  carouselContent: {
+    paddingTop: 200,
+  },
   item: {
     flex: 1,
     paddingVertical: 8,
