@@ -20,94 +20,94 @@ interface ILink {
 
 const links: ILinkCard[] = [
   {
-    title: 'Основы',
+    title: 'Basics',
     key: LinkCardKey.base,
     data: [
       {
-        name: 'Урок 1 (введение)',
-        description: 'Произвели рендер первого нашего трехмерного элемента',
+        name: '1. Introduction',
+        description: 'We rendered our first three-dimensional element',
         route: screens.lesson1,
       },
       {
-        name: 'Урок 2 (позиционирование)',
-        description: 'Научились позиционировать трехмерные объекты на сцене, трансформировать и объединять в группы',
+        name: '2. Positioning',
+        description: 'Learned how to position three-dimensional objects on stage, transform and group them together',
         route: screens.lesson2,
       },
       {
-        name: 'Урок 3 (анимирование)',
-        description: 'Научились анимировать трехмерные объекты, а так же настраивать параметры камеры',
+        name: '3. Animation',
+        description: 'Learned how to animate three-dimensional objects, as well as customize camera settings',
         route: screens.lesson3,
       },
       {
-        name: 'Урок 4 (взаимодействие)',
-        description: 'Научились взаимодействовать с трехмерными объектами через жесты',
+        name: '4. Interaction',
+        description: 'Learned to interact with three-dimensional objects through gestures',
         route: screens.lesson4,
       },
       {
-        name: 'Урок 5 (текстуры)',
-        description: 'Научились загружать и редактировать текстуры',
+        name: '5. Textures',
+        description: 'Learned how to load and edit textures',
         route: screens.lesson5,
       },
       {
-        name: 'Урок 6 (трехмерный текст)',
-        description: 'Научились создавать трехмерный текст и попробовали новые материалы',
+        name: '6. Three-dimensional text',
+        description: 'Learned how to create three-dimensional text and tried new materials',
         route: screens.lesson6,
       },
     ]
   },
   {
-    title: 'Основные техники',
+    title: 'Basic techniques',
     key: LinkCardKey.baseTechnics,
     data: [
       {
-        name: 'Урок 7 (источники света)',
-        description: 'Попробовали использовать различные источники света',
+        name: '7. Light sources',
+        description: 'Tried using different light sources',
         route: screens.lesson7,
       },
       {
-        name: 'Урок 8 (тени)',
-        description: 'Активировали тени и попробовали их настроить',
+        name: '8. Shadows',
+        description: 'Activated the shadows and tried to customize them',
         route: screens.lesson8,
       },
       {
-        name: 'Урок 9 (первая сцена)',
-        description: 'Создали первую полноценную 3D сцену из нескольких предметов, повторили позиционирование, добавление текстур и работу со светом',
+        name: '9. First scene',
+        description: 'Created the first full 3D scene of multiple items, repeat positioning, adding textures and working with light',
         route: screens.lesson9,
       },
       {
-        name: 'Урок 10 (частицы)',
-        description: 'Попробовали работать с частицами, изучили их основные проблемы и их решения',
+        name: '10. Particles',
+        description: 'Tried working with particles, explored their main problems and their solutions',
         route: screens.lesson10,
       },
       {
-        name: 'Урок 11 (анимация, основанная на скролле)',
-        description: 'Попробовали работать с частицами, изучили их основные проблемы и их решения',
+        name: '11. Scroll-based animation',
+        description: 'Tried to implement animation based on user scrolling',
         route: screens.lesson11,
       }
     ]
   },
   {
-    title: 'Продвинутые техники',
+    title: 'Advanced techniques',
     key: LinkCardKey.advancedTechnics,
     data: [
       {
-        name: 'Урок 12 (физика)',
-        description: 'Попробовали использовать различные источники света',
+        name: '12. Physics',
+        description: 'Added physics with CANNON',
         route: screens.lesson12,
       },
       {
-        name: 'Урок 13 (импортирование моделей)',
-        description: 'Импортировали модели в различных форматах (obj, glb)',
+        name: '13. Model import',
+        description: 'Imported models in various formats (obj, glb)',
         route: screens.lesson13,
       },
       {
-        name: 'Урок 14 (шейдеры)',
-        description: 'Попробовали создать свой собственный шейдер',
+        name: '14. Shaders',
+        description: 'Tried creating your own shader',
         route: screens.lesson14,
       },
       {
-        name: 'Урок 15 (шейдеры)',
-        description: 'Попробовали создать свой собственный шейдер',
+        name: '15. Shaders',
+        description: 'Tried creating your own shader',
         route: screens.lesson15,
       },
     ]

@@ -18,7 +18,7 @@ const App = () => {
           <MainStack />
         </NavigationContainer>
       </GestureHandlerRootView>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
     </View>
   );
 };

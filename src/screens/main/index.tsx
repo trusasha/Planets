@@ -1,20 +1,36 @@
 import React, {FC} from 'react';
-import {SafeAreaView, SectionList, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {SafeAreaView, SectionList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {TScreenProps} from '@navigation/constants';
 import links from './links';
 import Carousel from '@components/carousel';
 import colors from '@constants/colors';
+import {LinearGradient} from 'expo-linear-gradient';
 
 const Main: FC<TScreenProps<'Main'>> = ({navigation: {navigate}}) => (
-  <SafeAreaView style={styles.container}>
+  <View style={styles.container}>
+    <LinearGradient
+      colors={[colors.background, `${colors.background}01`]}
+      style={styles.topGradient}
+      start={{x: 0, y: 0.6}}
+      end={{x: 0, y: 0.9}}
+      pointerEvents='none'
+    />
     <Carousel data={links} additionalContainerStyles={styles.carouselContent} />
-  </SafeAreaView>
+  </View>
 );
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+  },
+  topGradient: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 100,
+    zIndex: 10,
   },
   carouselContent: {
     paddingTop: 200,

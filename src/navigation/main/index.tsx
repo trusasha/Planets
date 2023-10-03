@@ -20,7 +20,7 @@ import Lesson14 from '@screens/lesson-14';
 const Stack = createNativeStackNavigator<TScreensParams>();
 
 const MainStack = () => (
-  <Stack.Navigator initialRouteName={screens.main}>
+  <Stack.Navigator initialRouteName={screens.main} screenOptions={{headerShown: false}}>
     <Stack.Screen name={screens.main} component={Main} />
     <Stack.Screen name={screens.lesson1} component={Lesson1} />
     <Stack.Screen name={screens.lesson2} component={Lesson2} />
