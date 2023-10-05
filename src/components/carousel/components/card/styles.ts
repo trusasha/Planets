@@ -27,12 +27,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
     flex: 1,
   },
-  title: {
-    fontSize: 28,
-    color: colors.white,
-    fontWeight: '700',
-    marginBottom: 16,
-  },
   item: {
     backgroundColor: `${colors.white}09`,
     borderRadius: 8,
@@ -41,15 +35,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 8,
     marginBottom: 12,
-  },
-  itemText: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: colors.white,
-    marginBottom: 6,
-  },
-  itemDescription: {
-    color: colors.white,
   },
   itemDisabled: {
     opacity: 0.5,
@@ -68,6 +53,12 @@ const styles = StyleSheet.create({
     zIndex: 1,
     top: 16,
     left: 16,
+  },
+  mb16: {
+    marginBottom: 16,
+  },
+  mb6: {
+    marginBottom: 6,
   },
 })
 

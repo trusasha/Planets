@@ -16,12 +16,14 @@ import Lesson11 from '@screens/lesson-11';
 import Lesson12 from '@screens/lesson-12';
 import Lesson13 from '@screens/lesson-13';
 import Lesson14 from '@screens/lesson-14';
+import Card from '@screens/card';
 
 const Stack = createNativeStackNavigator<TScreensParams>();
 
 const MainStack = () => (
   <Stack.Navigator initialRouteName={screens.main} screenOptions={{headerShown: false}}>
     <Stack.Screen name={screens.main} component={Main} />
+    <Stack.Screen name={screens.card} component={Card}/>
     <Stack.Screen name={screens.lesson1} component={Lesson1} />
     <Stack.Screen name={screens.lesson2} component={Lesson2} />
     <Stack.Screen name={screens.lesson3} component={Lesson3} />

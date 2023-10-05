@@ -1,7 +1,9 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { ILinkCard } from '@screens/main/links';
 
 const screens = {
   main: 'Main',
+  card: 'Card',
   lesson1: 'Lesson 1',
   lesson2: 'Lesson 2',
   lesson3: 'Lesson 3',
@@ -21,6 +23,7 @@ const screens = {
 
 export type TScreensParams = {
   'Main': undefined;
+  'Card': {card: ILinkCard}
   'Lesson 1': undefined;
   'Lesson 2': undefined;
   'Lesson 3': undefined;

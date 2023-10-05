@@ -1,14 +1,18 @@
-import React, {FC, useCallback, useState} from 'react';
-import Animated, {FadeOut, SharedValue} from 'react-native-reanimated';
-import styles, {FULL_SIZE} from './styles';
+import React, { FC, useCallback } from 'react';
+import Animated, { FadeOut, SharedValue } from 'react-native-reanimated';
+import styles, { FULL_SIZE } from './styles';
 import useCardAnimation from '@hooks/use-card-animation';
-import {ILinkCard} from '@screens/main/links';
+import { ILinkCard } from '@screens/main/links';
 import getPreviewByKey from './data';
-import {Text, View} from 'react-native';
-import {LinearGradient} from 'expo-linear-gradient';
+import { View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import colors from '@constants/colors';
 import TouchableScale from 'react-native-touchable-scale';
 import * as Haptics from 'expo-haptics';
+import { useNavigation } from '@react-navigation/native';
+import screens, { TScreensParams } from '@navigation/constants';
+import Text, { TextType } from '@components/text';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 interface ICard {
   item: ILinkCard;
@@ -16,14 +20,18 @@ interface ICard {
   index: number;
 }
 
-const Card: FC<ICard> = ({item: {key, data, title}, scrollX, index}) => {
+const Card: FC<ICard> = ({item, scrollX, index}) => {
+  const {key, data, title} = item
+
+  const {navigate} = useNavigation<NativeStackNavigationProp<TScreensParams>>()
+
   const imageStyles = useCardAnimation(FULL_SIZE, index, scrollX);
 
   const renderItem = useCallback(
     ({name, description}: ILinkCard['data'][number]) => (
       <Animated.View style={styles.item}>
-        <Text style={styles.itemText}>{name}</Text>
-        <Text style={styles.itemDescription}>{description}</Text>
+        <Text style={styles.mb6} type={TextType.subtitle}>{name}</Text>
+        <Text>{description}</Text>
       </Animated.View>
     ),
     []
@@ -31,6 +39,8 @@ const Card: FC<ICard> = ({item: {key, data, title}, scrollX, index}) => {
 
   const onPress = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+
+    navigate(screens.card, {card: item})
   };
 
   return (
@@ -43,7 +53,7 @@ const Card: FC<ICard> = ({item: {key, data, title}, scrollX, index}) => {
           end={{x: 0, y: 0.15}}
           style={styles.content}
         >
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.mb16} type={TextType.title}>{title}</Text>
           {data.map(renderItem)}
         </LinearGradient>
         <Animated.View style={styles.bottomGradient} exiting={FadeOut}>
