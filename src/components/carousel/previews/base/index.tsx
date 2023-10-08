@@ -22,7 +22,7 @@ const Base = () => {
 const styles = StyleSheet.create({
   flex: {
     flex: 1,
-    backgroundColor: '#262837',
+    backgroundColor: '#141617',
   },
 });
 

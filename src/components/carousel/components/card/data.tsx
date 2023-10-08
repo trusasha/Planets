@@ -8,14 +8,10 @@ const getPreviewByKey = (type: ILinkCard['key']) => {
   switch (type) {
     case LinkCardKey.base:
       return <Base />;
-    // case LinkCardKey.baseTechnics:
-    //   return <BaseTechnics />;
-    // case LinkCardKey.advancedTechnics:
-    //   return <AdvancedTechnics />;
     case LinkCardKey.baseTechnics:
-      return <Base />;
+      return <BaseTechnics />;
     case LinkCardKey.advancedTechnics:
-      return <Base />;
+      return <AdvancedTechnics />;
 
     default:
       return null;

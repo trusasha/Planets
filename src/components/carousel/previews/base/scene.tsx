@@ -1,27 +1,47 @@
 import {useFrame} from '@react-three/fiber/native';
+import {TextureLoader} from 'expo-three';
 import React, {useRef} from 'react';
-import {BufferGeometry, Material, Mesh, NormalBufferAttributes} from 'three';
+import {DirectionalLight, Group} from 'three';
 
 const Scene = () => {
-  const mesh = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[]>>(null);
+  const mesh = useRef<Group>(null);
+  const light = useRef<DirectionalLight>(null);
+
+  const map = new TextureLoader().load(require('../../assets/textures/earth-diffuse.jpg'));
+  const normal = new TextureLoader().load(require('../../assets/textures/earth-normal.jpg'));
+  const clouds = new TextureLoader().load(require('../../assets/textures/earth-clouds.jpg'));
+  const illumination = new TextureLoader().load(
+    require('../../assets/textures/earth-illumination.jpg')
+  );
+  const glossiness = new TextureLoader().load(
+    require('../../assets/textures/earth-glossiness.jpg')
+  );
+
+  light.current?.lookAt(mesh.current?.position);
 
   useFrame(() => {
     if (mesh.current) {
-      mesh.current.rotation.x = mesh.current.rotation.z += 0.01;
+      mesh.current.rotation.y = mesh.current.rotation.y += 0.001;
     }
   });
 
   return (
-    <group position={[0, 0, -2.5]}>
-      <ambientLight />
-      <mesh ref={mesh} scale={0.8} rotation={[Math.PI / 4, Math.PI / 4, 0]}>
-        <sphereGeometry />
-        <meshStandardMaterial wireframe color="orange" />
-      </mesh>
-      <mesh scale={15} position={[0, -1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[1, 1, 32, 32]} />
-        <meshStandardMaterial wireframe color="#FF00FF" />
-      </mesh>
+    <group position={[0.4, -0.3, -2.5]} scale={1.4}>
+      <directionalLight ref={light} position={[-2, -2, 2]} intensity={1} />
+      <group ref={mesh}>
+        <mesh scale={1.1}>
+          <sphereGeometry args={[1, 50, 50]} />
+          <meshStandardMaterial map={map} normalMap={normal} roughnessMap={glossiness} />
+        </mesh>
+        <mesh scale={1.11}>
+          <sphereGeometry args={[1, 50, 50]} />
+          <meshStandardMaterial alphaMap={clouds} transparent color={'white'} />
+        </mesh>
+        <mesh scale={1.101}>
+          <sphereGeometry args={[1, 50, 50]} />
+          <meshBasicMaterial alphaMap={illumination} transparent color={'orange'} />
+        </mesh>
+      </group>
     </group>
   );
 };
