@@ -46,7 +46,7 @@ const Card: FC<ICard> = ({item, scrollX, index}) => {
   return (
     <TouchableScale onPress={onPress} activeScale={0.95}>
       <Animated.View style={[styles.container, imageStyles]}>
-        <View style={styles.preview}>{getPreviewByKey(key)}</View>
+        <View style={styles.preview}>{getPreviewByKey(key, scrollX, index)}</View>
         <LinearGradient
           colors={[`${colors.lighterBlack}10`, colors.lighterBlack]}
           start={{x: 0, y: 0}}

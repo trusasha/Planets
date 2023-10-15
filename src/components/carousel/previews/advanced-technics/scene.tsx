@@ -1,9 +1,16 @@
+import {FULL_SIZE} from '@components/carousel/components/card/styles';
 import {useFrame} from '@react-three/fiber/native';
 import {TextureLoader} from 'expo-three';
-import React, {useRef} from 'react';
+import React, {FC, useRef} from 'react';
+import {SharedValue, interpolate} from 'react-native-reanimated';
 import {DirectionalLight, Group} from 'three';
 
-const Scene = () => {
+interface IScene {
+  scrollX: SharedValue<number>;
+  index: number
+}
+
+const Scene: FC<IScene> = ({scrollX, index}) => {
   const mesh = useRef<Group>(null);
   const light = useRef<DirectionalLight>(null);
 
@@ -13,7 +20,13 @@ const Scene = () => {
 
   useFrame(() => {
     if (mesh.current) {
-      mesh.current.rotation.y = mesh.current.rotation.y += 0.001;
+      const animate = interpolate(
+        scrollX.value,
+        [FULL_SIZE * (index - 1), FULL_SIZE * index, FULL_SIZE * (index + 1)],
+        [0.001, 0.002, 0.001]
+      );
+
+      mesh.current.rotation.y = mesh.current.rotation.y += animate;
     }
   });
 
