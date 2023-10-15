@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {SafeAreaView, SectionList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {TScreenProps} from '@navigation/constants';
 import links from './links';
 import Carousel from '@components/carousel';
@@ -9,10 +9,10 @@ import {LinearGradient} from 'expo-linear-gradient';
 const Main: FC<TScreenProps<'Main'>> = ({navigation: {navigate}}) => (
   <View style={styles.container}>
     <LinearGradient
-      colors={[colors.background, `${colors.background}01`]}
+      colors={[colors.background, `${colors.background}00`]}
       style={styles.topGradient}
-      start={{x: 0, y: 0.6}}
-      end={{x: 0, y: 0.9}}
+      start={{x: 0, y: 0.5}}
+      end={{x: 0, y: 1}}
       pointerEvents='none'
     />
     <Carousel data={links} additionalContainerStyles={styles.carouselContent} />
@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   carouselContent: {
-    paddingTop: 200,
+    alignSelf: 'flex-end',
+    paddingBottom: 50,
   },
   item: {
     flex: 1,
