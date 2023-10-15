@@ -80,7 +80,6 @@ const Scene = forwardRef<ISceneRef>((props, ref) => {
         world.remove(body);
       });
 
-
       objects.current = [];
     },
   }));
