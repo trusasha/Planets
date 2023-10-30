@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    backgroundColor: 'red',
     height: 300,
   },
   gradient: {

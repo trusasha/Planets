@@ -2,6 +2,7 @@ import {useFrame} from '@react-three/fiber';
 import React, {FC} from 'react';
 import {SharedValue, interpolate} from 'react-native-reanimated';
 import {FULL_SIZE} from '../components/card/styles';
+import Background from './components/background';
 
 interface IScene {
   scrollX: SharedValue<number>;
@@ -19,6 +20,7 @@ const Scene: FC<IScene> = ({scrollX}) => {
 
   return (
     <>
+      <Background />
       <ambientLight intensity={1} />
       <directionalLight position={[1, 1, 0]} intensity={1} />
 

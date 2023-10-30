@@ -21,7 +21,7 @@ const Header: FC<IHeader> = ({scrollX}) => {
         end={{x: 0, y: 1}}
         pointerEvents="none"
       />
-      <Canvas style={{borderWidth: 1, borderColor: 'green'}}>
+      <Canvas>
         <Scene scrollX={scrollX} />
       </Canvas>
     </View>
