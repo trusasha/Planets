@@ -5,6 +5,7 @@ import {Canvas} from '@react-three/fiber/native';
 import Scene, {ISceneRef} from './scene';
 import useControls from 'r3f-native-orbitcontrols';
 import Button from '@components/button';
+import Header from '@components/header';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('screen');
 
@@ -19,20 +20,23 @@ const Lesson12: FC<TScreenProps<'Lesson 12'>> = () => {
   const onClean = useCallback(() => scene.current?.clean(), []);
 
   return (
-    <View style={styles.flex} {...events}>
-      <Suspense fallback={null}>
-        <Canvas style={styles.flex} shadows>
-          <Scene ref={scene} />
-          <OrbitControls />
-        </Canvas>
-      </Suspense>
-      <Button
-        title="Add object"
-        onPress={onAdd}
-        additionalStyles={[styles.button, styles.buttonAdd]}
-      />
-      <Button title="Clean" onPress={onClean} additionalStyles={styles.button} />
-    </View>
+    <>
+      <Header title="Physics" />
+      <View style={styles.flex} {...events}>
+        <Suspense fallback={null}>
+          <Canvas style={styles.flex} shadows>
+            <Scene ref={scene} />
+            <OrbitControls />
+          </Canvas>
+        </Suspense>
+        <Button
+          title="Add object"
+          onPress={onAdd}
+          additionalStyles={[styles.button, styles.buttonAdd]}
+        />
+        <Button title="Clean" onPress={onClean} additionalStyles={styles.button} />
+      </View>
+    </>
   );
 };
 

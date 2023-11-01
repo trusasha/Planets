@@ -105,11 +105,6 @@ const links: ILinkCard[] = [
         description: 'Tried creating your own shader',
         route: screens.lesson14,
       },
-      {
-        name: '15. Shaders',
-        description: 'Tried creating your own shader',
-        route: screens.lesson15,
-      },
     ]
   }
 ];

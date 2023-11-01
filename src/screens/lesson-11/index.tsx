@@ -5,6 +5,7 @@ import {Canvas} from '@react-three/fiber/native';
 import Scene, {CONTENT_HEIGHT} from './scene';
 import * as THREE from 'three';
 import Animated, {useAnimatedScrollHandler, useSharedValue} from 'react-native-reanimated';
+import Header from '@components/header';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('screen');
 
@@ -21,26 +22,29 @@ const Lesson11: FC<TScreenProps<'Lesson 11'>> = () => {
   });
 
   return (
-    <View style={styles.flex}>
-      <View style={styles.background}>
-        <Suspense fallback={null}>
-          <Canvas style={styles.flex} camera={camera}>
-            <Scene scrollY={scrollY} />
-          </Canvas>
-        </Suspense>
+    <>
+      <Header title="Scroll-based animation" />
+      <View style={styles.flex}>
+        <View style={styles.background}>
+          <Suspense fallback={null}>
+            <Canvas style={styles.flex} camera={camera}>
+              <Scene scrollY={scrollY} />
+            </Canvas>
+          </Suspense>
+        </View>
+        <Animated.ScrollView onScroll={onScroll} scrollEventThrottle={16}>
+          <View style={styles.content}>
+            <Text style={styles.title}>TITLE</Text>
+          </View>
+          <View style={styles.content}>
+            <Text style={[styles.title, styles.titleRight]}>DESCRIPTION</Text>
+          </View>
+          <View style={styles.content}>
+            <Text style={styles.title}>CONCLUSION</Text>
+          </View>
+        </Animated.ScrollView>
       </View>
-      <Animated.ScrollView onScroll={onScroll} scrollEventThrottle={16}>
-        <View style={styles.content}>
-          <Text style={styles.title}>TITLE</Text>
-        </View>
-        <View style={styles.content}>
-          <Text style={[styles.title, styles.titleRight]}>DESCRIPTION</Text>
-        </View>
-        <View style={styles.content}>
-          <Text style={styles.title}>CONCLUSION</Text>
-        </View>
-      </Animated.ScrollView>
-    </View>
+    </>
   );
 };
 

@@ -5,16 +5,20 @@ import {Canvas} from '@react-three/fiber/native';
 import {GestureDetector} from 'react-native-gesture-handler';
 import Scene from './scene';
 import useOrbitControl from '@hooks/use-orbit-control';
+import Header from '@components/header';
 
 const Lesson8: FC<TScreenProps<'Lesson 8'>> = () => {
   const {gesture, moveCamera} = useOrbitControl();
 
   return (
-    <GestureDetector gesture={gesture}>
-      <Canvas shadows style={styles.flex}>
-        <Scene moveCamera={moveCamera} />
-      </Canvas>
-    </GestureDetector>
+    <>
+      <Header title="Shadows" />
+      <GestureDetector gesture={gesture}>
+        <Canvas shadows style={styles.flex}>
+          <Scene moveCamera={moveCamera} />
+        </Canvas>
+      </GestureDetector>
+    </>
   );
 };
 

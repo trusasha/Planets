@@ -8,6 +8,7 @@ import {SharedValue, useSharedValue} from 'react-native-reanimated';
 import * as THREE from 'three';
 import {TextureLoader} from 'expo-three';
 import animateValueToZero from '@utils/animate-value-to-zero';
+import Header from '@components/header';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('screen');
 
@@ -87,13 +88,16 @@ const Lesson5: FC<TScreenProps<'Lesson 5'>> = () => {
     });
 
   return (
-    <GestureDetector gesture={gesture}>
-      <Canvas style={styles.flex}>
-        <pointLight position={[2, 3, 4]} />
-        <ambientLight />
-        <Door isPressed={isPressed} cursor={cursor} />
-      </Canvas>
-    </GestureDetector>
+    <>
+      <Header title="Textures" />
+      <GestureDetector gesture={gesture}>
+        <Canvas style={styles.flex}>
+          <pointLight position={[2, 3, 4]} />
+          <ambientLight />
+          <Door isPressed={isPressed} cursor={cursor} />
+        </Canvas>
+      </GestureDetector>
+    </>
   );
 };
 

@@ -6,6 +6,7 @@ import Scene from './scene';
 import * as THREE from 'three';
 import useControls from 'r3f-native-orbitcontrols';
 import ButtonGroup, {IButtonGroupOption} from '@components/button-group';
+import Header from '@components/header';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('screen');
 
@@ -33,22 +34,25 @@ const Lesson14: FC<TScreenProps<'Lesson 14'>> = () => {
   camera.position.set(0.25, -0.25, 1);
 
   return (
-    <View style={styles.flex}>
-      <View style={styles.flex} {...events}>
-        <Suspense fallback={null}>
-          <Canvas style={styles.flex} camera={camera}>
-            <OrbitControls />
-            <Scene selectedExample={currentExample}/>
-          </Canvas>
-        </Suspense>
+    <>
+      <Header title="Shaders" />
+      <View style={styles.flex}>
+        <View style={styles.flex} {...events}>
+          <Suspense fallback={null}>
+            <Canvas style={styles.flex} camera={camera}>
+              <OrbitControls />
+              <Scene selectedExample={currentExample} />
+            </Canvas>
+          </Suspense>
+        </View>
+        <ButtonGroup
+          additionalStyles={styles.buttonGroup}
+          options={options}
+          selectedOption={currentExample}
+          onSelect={setCurrentExample}
+        />
       </View>
-      <ButtonGroup
-        additionalStyles={styles.buttonGroup}
-        options={options}
-        selectedOption={currentExample}
-        onSelect={setCurrentExample}
-      />
-    </View>
+    </>
   );
 };
 

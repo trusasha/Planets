@@ -4,6 +4,7 @@ import {TScreenProps} from '@navigation/constants';
 import {Canvas, useFrame, useThree} from '@react-three/fiber/native';
 import {BufferGeometry, Material, Mesh, NormalBufferAttributes} from 'three';
 import * as THREE from 'three';
+import Header from '@components/header';
 
 const Cube = () => {
   const mesh = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[]>>(null);
@@ -39,11 +40,14 @@ const Cube = () => {
 };
 
 const Lesson3: FC<TScreenProps<'Lesson 3'>> = () => (
-  <Canvas style={styles.flex}>
-    <ambientLight />
-    <pointLight position={[10, 10, 10]} />
-    <Cube />
-  </Canvas>
+  <>
+    <Header title="Animation" />
+    <Canvas style={styles.flex}>
+      <ambientLight />
+      <pointLight position={[10, 10, 10]} />
+      <Cube />
+    </Canvas>
+  </>
 );
 
 const styles = StyleSheet.create({

@@ -7,6 +7,7 @@ import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import {SharedValue, useSharedValue} from 'react-native-reanimated';
 import * as THREE from 'three';
 import animateValueToZero from '@utils/animate-value-to-zero';
+import Header from '@components/header';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('screen');
 
@@ -70,13 +71,16 @@ const Lesson4: FC<TScreenProps<'Lesson 4'>> = () => {
     });
 
   return (
-    <GestureDetector gesture={gesture}>
-      <Canvas style={styles.flex}>
-        <ambientLight />
-        <pointLight position={[10, 10, 10]} />
-        <Cube isPressed={isPressed} cursor={cursor} />
-      </Canvas>
-    </GestureDetector>
+    <>
+      <Header title="Interaction" />
+      <GestureDetector gesture={gesture}>
+        <Canvas style={styles.flex}>
+          <ambientLight />
+          <pointLight position={[10, 10, 10]} />
+          <Cube isPressed={isPressed} cursor={cursor} />
+        </Canvas>
+      </GestureDetector>
+    </>
   );
 };
 

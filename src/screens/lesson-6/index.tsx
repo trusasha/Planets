@@ -7,6 +7,7 @@ import {useSharedValue} from 'react-native-reanimated';
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry';
 import Text from './text';
 import Donut from './donut';
+import Header from '@components/header';
 
 extend({TextGeometry});
 
@@ -37,16 +38,19 @@ const Lesson6: FC<TScreenProps<'Lesson 6'>> = () => {
     });
 
   return (
-    <GestureDetector gesture={gesture}>
-      <Canvas style={styles.flex}>
-        <ambientLight />
-        <pointLight position={[10, 10, 10]} />
-        <Text isPressed={isPressed} cursor={cursor} />
-        {Array.from({length: 100}).map((_, index) => (
-          <Donut key={index} />
-        ))}
-      </Canvas>
-    </GestureDetector>
+    <>
+      <Header title="Three-dimensional text" />
+      <GestureDetector gesture={gesture}>
+        <Canvas style={styles.flex}>
+          <ambientLight />
+          <pointLight position={[10, 10, 10]} />
+          <Text isPressed={isPressed} cursor={cursor} />
+          {Array.from({length: 100}).map((_, index) => (
+            <Donut key={index} />
+          ))}
+        </Canvas>
+      </GestureDetector>
+    </>
   );
 };
 

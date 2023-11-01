@@ -5,6 +5,7 @@ import {Canvas} from '@react-three/fiber/native';
 import Scene from './scene';
 import useControls from 'r3f-native-orbitcontrols';
 import {PerspectiveCamera} from 'three';
+import Header from '@components/header';
 
 const Lesson9: FC<TScreenProps<'Lesson 9'>> = () => {
   const [OrbitControls, events] = useControls();
@@ -14,12 +15,15 @@ const Lesson9: FC<TScreenProps<'Lesson 9'>> = () => {
   camera.position.set(5, 5, 15);
 
   return (
-    <View style={styles.flex} {...events}>
-      <Canvas shadows style={styles.flex} camera={camera}>
-        <OrbitControls />
-        <Scene />
-      </Canvas>
-    </View>
+    <>
+      <Header title="First scene" />
+      <View style={styles.flex} {...events}>
+        <Canvas shadows style={styles.flex} camera={camera}>
+          <OrbitControls />
+          <Scene />
+        </Canvas>
+      </View>
+    </>
   );
 };
 
