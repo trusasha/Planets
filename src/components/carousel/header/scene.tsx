@@ -3,6 +3,9 @@ import React, {FC} from 'react';
 import {SharedValue, interpolate} from 'react-native-reanimated';
 import {FULL_SIZE} from '../components/card/styles';
 import Background from './components/background';
+import Base from './components/base';
+import BasicTechniques from './components/basic-techniques';
+import AdvancedTechniques from './components/advanced-techniques';
 
 interface IScene {
   scrollX: SharedValue<number>;
@@ -24,20 +27,14 @@ const Scene: FC<IScene> = ({scrollX}) => {
       <ambientLight intensity={1} />
       <directionalLight position={[1, 1, 0]} intensity={1} />
 
-      <mesh>
-        <sphereGeometry args={[1, 16, 16]} />
-        <meshStandardMaterial />
-      </mesh>
+      {/* <Base />
+      <BasicTechniques /> */}
+      <AdvancedTechniques />
 
-      <mesh position={[2, 2.8, 4.8]}>
-        <sphereGeometry args={[0.5, 16, 16]} />
-        <meshStandardMaterial color="green" />
-      </mesh>
-
-      <mesh position={[-0.3, 7, 5]}>
+      {/* <mesh position={[-0.3, 7, 5]}>
         <sphereGeometry args={[0.5, 16, 16]} />
         <meshStandardMaterial color="blue" />
-      </mesh>
+      </mesh> */}
     </>
   );
 };
