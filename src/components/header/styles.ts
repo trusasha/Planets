@@ -14,14 +14,18 @@ const styles = StyleSheet.create({
     left: 18,
     right: 18,
   },
-  backIcon: {
+  back: {
     position: 'absolute',
     left: 0,
+    justifyContent: 'center',
     alignSelf: 'center',
     width: 40,
     height: 40,
     backgroundColor: colors.white,
     borderRadius: 40,
+  },
+  icon: {
+    left: 6,
   },
   title: {
     alignSelf: 'center',
