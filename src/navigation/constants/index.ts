@@ -22,23 +22,23 @@ const screens = {
 } as const
 
 export type TScreensParams = {
-  'Main': undefined;
-  'Card': {card: ILinkCard}
-  'Lesson 1': undefined;
-  'Lesson 2': undefined;
-  'Lesson 3': undefined;
-  'Lesson 4': undefined;
-  'Lesson 5': undefined;
-  'Lesson 6': undefined;
-  'Lesson 7': undefined;
-  'Lesson 8': undefined;
-  'Lesson 9': undefined;
-  'Lesson 10': undefined;
-  'Lesson 11': undefined;
-  'Lesson 12': undefined;
-  'Lesson 13': undefined;
-  'Lesson 14': undefined;
-  'Lesson 15': undefined;
+  [screens.main]: undefined;
+  [screens.card]: {card: ILinkCard}
+  [screens.lesson1]: undefined;
+  [screens.lesson2]: undefined;
+  [screens.lesson3]: undefined;
+  [screens.lesson4]: undefined;
+  [screens.lesson5]: undefined;
+  [screens.lesson6]: undefined;
+  [screens.lesson7]: undefined;
+  [screens.lesson8]: undefined;
+  [screens.lesson9]: undefined;
+  [screens.lesson10]: undefined;
+  [screens.lesson11]: undefined;
+  [screens.lesson12]: undefined;
+  [screens.lesson13]: undefined;
+  [screens.lesson14]: undefined;
+  [screens.lesson15]: undefined;
 }
 
 export type TScreenProps<T extends keyof TScreensParams> = NativeStackScreenProps<

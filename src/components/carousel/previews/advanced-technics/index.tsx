@@ -1,35 +1,49 @@
-import React, {FC} from 'react';
-import {Dimensions, StyleSheet, View} from 'react-native';
-import {Canvas} from '@react-three/fiber/native';
-import Scene from './scene';
-import {PerspectiveCamera} from 'three';
-import {SharedValue} from 'react-native-reanimated';
+import colors from '@constants/colors';
+import {useFrame} from '@react-three/fiber/native';
+import {TextureLoader} from 'expo-three';
+import React, {FC, useEffect, useRef} from 'react';
+import {Group, SpotLight} from 'three';
 
-const {width: SCREEN_WIDTH} = Dimensions.get('screen');
-const aspectRatio = (SCREEN_WIDTH - 36) / 150;
+const AdvancedTechnics: FC = () => {
+  const mesh = useRef<Group>(null);
+  const light = useRef<SpotLight>(null);
 
-interface IAdvancedTechnics {
-  scrollX: SharedValue<number>;
-  index: number;
-}
+  const map = new TextureLoader().load(require('../../assets/textures/jupiter-diffuse.jpg'));
 
-const AdvancedTechnics: FC<IAdvancedTechnics> = ({scrollX, index}) => {
-  const camera = new PerspectiveCamera(50, aspectRatio);
+  light.current?.lookAt(mesh.current?.position);
+
+  useFrame(() => {
+    if (mesh.current) {
+      mesh.current.rotation.y = mesh.current.rotation.y += 0.001;
+    }
+  });
+
+
+  useEffect(() => {
+    if (mesh.current) {
+      light.current.target = mesh.current;
+    }
+  }, []);
 
   return (
-    <View style={{flex: 1}}>
-      <Canvas shadows style={styles.flex} camera={camera}>
-        <Scene scrollX={scrollX} index={index} />
-      </Canvas>
-    </View>
+    <group position={[-0.02, -0.02, 30.3]} scale={0.1}>
+      <spotLight
+        ref={light}
+        position={[-8, 0, -5]} 
+        color={colors.sun}
+        intensity={1}
+        distance={100}
+        angle={Math.PI / 4}
+        penumbra={1}
+      />
+      <group ref={mesh}>
+        <mesh scale={1.1}>
+          <sphereGeometry args={[1, 50, 50]} />
+          <meshStandardMaterial map={map} />
+        </mesh>
+      </group>
+    </group>
   );
 };
-
-const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-    backgroundColor: '#141617',
-  },
-});
 
 export default AdvancedTechnics;

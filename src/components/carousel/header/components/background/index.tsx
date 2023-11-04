@@ -2,7 +2,7 @@ import { useThree } from "@react-three/fiber/native";
 import React, { useRef } from "react";
 import * as THREE from 'three';
 
-const count = 20000;
+const count = 40000;
 
 const colorInside = new THREE.Color('#99f6ff');
 const colorOutside = new THREE.Color('#fff09a');
@@ -34,7 +34,7 @@ const Background = () => {
         /**
          * Calculate the radius depending on the particle index, ensuring it's no less than 20.
          */
-        const r = 20 + (100 * (i / count));
+        const r = 30 + (20 * (i / count));
 
         /**
          * Convert from spherical to Cartesian coordinates.
@@ -61,7 +61,7 @@ const Background = () => {
     });
 
     return (
-      <>
+      <group position={[0, 0, 20]}>
         <points ref={points}>
           <bufferGeometry ref={geometry} />
           <pointsMaterial
@@ -72,7 +72,7 @@ const Background = () => {
             depthWrite={false}
           />
         </points>
-      </>
+      </group>
     );
 }
 

@@ -1,35 +1,47 @@
-import React, {FC} from 'react';
-import {Dimensions, StyleSheet, View} from 'react-native';
-import {Canvas} from '@react-three/fiber/native';
-import Scene from './scene';
-import {PerspectiveCamera} from 'three';
-import {SharedValue} from 'react-native-reanimated';
+import {useFrame} from '@react-three/fiber/native';
+import {TextureLoader} from 'expo-three';
+import React, {FC, useEffect, useRef} from 'react';
+import {Group, SpotLight} from 'three';
+import * as THREE from 'three';
 
-const {width: SCREEN_WIDTH} = Dimensions.get('screen');
-const aspectRatio = (SCREEN_WIDTH - 36) / 150;
+const Scene: FC = () => {
+  const mesh = useRef<Group>(null);
+  const light = useRef<SpotLight>(null);
 
-interface IBaseTechnics {
-  scrollX: SharedValue<number>;
-  index: number;
-}
+  const map = new TextureLoader().load(require('../../assets/textures/mars-diffuse.jpg'));
 
-const BaseTechnics: FC<IBaseTechnics> = ({scrollX, index}) => {
-  const camera = new PerspectiveCamera(50, aspectRatio);
+  useFrame(() => {
+    if (mesh.current) {
+      mesh.current.rotation.y = mesh.current.rotation.y += 0.001;
+    }
+  });
+
+  useEffect(() => {
+    if (mesh.current) {
+      light.current.target = mesh.current;
+    }
+  }, []);
 
   return (
-    <View style={{flex: 1}}>
-      <Canvas shadows style={styles.flex} camera={camera}>
-        <Scene scrollX={scrollX} index={index} />
-      </Canvas>
-    </View>
+    <group position={[0.26, -0.02, 20.27]} scale={0.1}>
+      <spotLight
+        ref={light}
+        position={[-2, 0, -1]}
+        color="#fffacb"
+        intensity={3}
+        distance={100}
+        angle={Math.PI / 4}
+        penumbra={1}
+        decay={2}
+      />
+      <group ref={mesh}>
+        <mesh scale={1.1}>
+          <sphereGeometry args={[1, 50, 50]} />
+          <meshStandardMaterial map={map} roughness={1} metalness={0} />
+        </mesh>
+      </group>
+    </group>
   );
 };
 
-const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-    backgroundColor: '#141617',
-  },
-});
-
-export default BaseTechnics;
+export default Scene;
