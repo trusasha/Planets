@@ -9,8 +9,8 @@ const getPreviewByKey = (type: ILinkCard['key'], scrollX: SharedValue<number>, i
   switch (type) {
     case LinkCardKey.base:
       return <Base />;
-    // case LinkCardKey.baseTechnics:
-    //   return <BasicTechniques />;
+    case LinkCardKey.baseTechnics:
+      return <BasicTechniques />;
     // case LinkCardKey.advancedTechnics:
     //   return <AdvancedTechniques />;
 
