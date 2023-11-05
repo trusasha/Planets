@@ -1,38 +1,77 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {BufferGeometry, Material, Mesh, NormalBufferAttributes} from 'three';
 import * as THREE from 'three';
 import shader from './shader';
+import {useFrame} from '@react-three/fiber/native';
 
-const fieldSize = 5;
+const fieldSize = 3;
+const numPlanes = 5;
 
 const AdvancedTechniques = () => {
-  const object = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[]>>(null);
+  const planes = useRef([]);
+  const [planeGeometries, setPlaneGeometries] = useState([]);
 
-  const geometry = useRef<THREE.PlaneGeometry>(null);
-
+  // Создаём геометрию плоскостей и сохраняем в состоянии
   useEffect(() => {
-    if (geometry.current) {
-      const count = geometry.current.attributes.position.count;
-      const randoms = new Float32Array(count);
+    setPlaneGeometries(
+      new Array(numPlanes).fill('').map(() => {
+        const geometry = new THREE.PlaneGeometry(fieldSize, fieldSize * 10, 16, 16 * 10);
+        const count = geometry.attributes.position.count;
+        const randoms = new Float32Array(count);
 
-      for (let i = 0; i < count; i++) {
-        randoms[i] = Math.random();
+        for (let i = 0; i < count; i++) {
+          randoms[i] = Math.random();
+        }
+
+        geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1));
+        return geometry;
+      })
+    );
+  }, []);
+
+  useFrame(() => {
+    for (let i = 0; i < numPlanes; i++) {
+      const plane = planes.current[i];
+
+      if (plane) {
+        // Двигаем каждую плоскость
+        plane.position.y -= 0.05;
+
+        // Проверяем, прошла ли плоскость точку, где её надо переместить в конец
+        if (plane.position.y < -fieldSize * 5) {
+          plane.position.y += fieldSize * 10 * numPlanes;
+        }
       }
-
-      geometry.current.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1));
     }
   });
 
   return (
-    <group position={[0, -2, 1]} scale={4} rotation={[-Math.PI / 2, 0, 0]}>
-      <mesh ref={object}>
-      <planeGeometry ref={geometry} args={[fieldSize, fieldSize * 10, 128, 128 * 10]} />
-      <rawShaderMaterial
-        transparent
-        vertexShader={shader.vertex}
-        fragmentShader={shader.fragment}
-      />
-    </mesh>
+    <group position={[0, -10, 1]} scale={4} rotation={[-Math.PI / 2, 0, 0]}>
+      {planeGeometries.map((geometry, idx) => (
+        <mesh
+          key={idx}
+          ref={(ref) => (planes.current[idx] = ref)}
+          position={[0, idx * fieldSize * 10 - fieldSize * 5, 1]}
+          scale={4}
+          geometry={geometry}
+        >
+          <rawShaderMaterial
+            transparent
+            wireframe
+            vertexShader={shader.vertex}
+            fragmentShader={shader.fragment}
+          />
+        </mesh>
+      ))}
+      {/* <mesh ref={object}>
+        <planeGeometry ref={geometry} args={[fieldSize, fieldSize * 10, 32, 32 * 10]} />
+        <rawShaderMaterial
+          transparent
+          wireframe
+          vertexShader={shader.vertex}
+          fragmentShader={shader.fragment}
+        />
+      </mesh> */}
     </group>
   );
 };
