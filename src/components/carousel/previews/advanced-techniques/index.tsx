@@ -1,19 +1,12 @@
 import useModelLoader from '@hooks/use-model-loader';
 import React, { useRef } from 'react';
-import orvilleObj from '../../assets/orville'
+import orvilleObj from '../../header/assets/orville'
 import { BufferGeometry, Material, Mesh, NormalBufferAttributes } from 'three';
-import { useFrame } from '@react-three/fiber';
 
 const AdvancedTechniques = () => {
   const object = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[]>>(null)
 
   const [group] = useModelLoader(orvilleObj)
-
-  // useFrame(() => {
-  //   if (object.current) {
-  //     object.current.rotation.y = object.current.rotation.y + 0.005;
-  //   }
-  // })
 
   if (!group) {
     return null;

@@ -1,18 +1,17 @@
 import useModelLoader from '@hooks/use-model-loader';
 import React, { useRef } from 'react';
-import shuttleObj from '../../assets/shuttle'
+import ufoObj from '../../header/assets/ufo'
 import { BufferGeometry, Material, Mesh, NormalBufferAttributes } from 'three';
 import { useFrame } from '@react-three/fiber';
 
-const Base = () => {
+const BasicTechniques = () => {
   const object = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[]>>(null)
 
-  const [group] = useModelLoader(shuttleObj)
+  const [group] = useModelLoader(ufoObj)
 
-  useFrame(({clock: {elapsedTime}}) => {
+  useFrame(() => {
     if (object.current) {
-      object.current.rotation.y = -Math.PI / 3 + Math.sin(elapsedTime) * 0.1;
-      object.current.rotation.x = Math.PI / 5 + Math.sin(elapsedTime * 1.5) * 0.05;
+      object.current.rotation.y = object.current.rotation.y + 0.005;
     }
   })
 
@@ -21,10 +20,10 @@ const Base = () => {
   }
 
   return (
-    <mesh ref={object} rotation={[Math.PI / 5, -Math.PI / 3 , 0]} position={[0, -1, -3]}>
+    <mesh ref={object} position={[8, 2.5, 5.7]}>
       <primitive object={group} />
     </mesh>
   );
 };
 
-export default Base;
+export default BasicTechniques;

@@ -3,9 +3,9 @@ import React, {FC} from 'react';
 import {SharedValue, interpolate} from 'react-native-reanimated';
 import {FULL_SIZE} from '../components/card/styles';
 import Background from './components/background';
-import Base from '../previews/base';
-import AdvancedTechnics from '../previews/advanced-technics';
-import BaseTechnics from '../previews/base-technics';
+import Earth from './components/planets/earth';
+import Jupiter from './components/planets/jupiter';
+import Mars from './components/planets/mars';
 
 interface IScene {
   scrollX: SharedValue<number>;
@@ -24,9 +24,9 @@ const Scene: FC<IScene> = ({scrollX}) => {
     <>
       <Background />
 
-      <Base />
-      <BaseTechnics />
-      <AdvancedTechnics />
+      <Earth />
+      <Mars />
+      <Jupiter />
     </>
   );
 };

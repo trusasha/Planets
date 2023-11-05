@@ -13,6 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import screens, { TScreensParams } from '@navigation/constants';
 import Text, { TextType } from '@components/text';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Canvas } from '@react-three/fiber/native';
 
 interface ICard {
   item: ILinkCard;
@@ -29,7 +30,7 @@ const Card: FC<ICard> = ({item, scrollX, index}) => {
 
   const renderItem = useCallback(
     ({name, description}: ILinkCard['data'][number]) => (
-      <Animated.View style={styles.item}>
+      <Animated.View style={styles.item} key={name}>
         <Text style={styles.mb6} type={TextType.subtitle}>{name}</Text>
         <Text>{description}</Text>
       </Animated.View>
@@ -46,7 +47,11 @@ const Card: FC<ICard> = ({item, scrollX, index}) => {
   return (
     <TouchableScale onPress={onPress} activeScale={0.95}>
       <Animated.View style={[styles.container, imageStyles]}>
-        {/* <View style={styles.preview}>{getPreviewByKey(key, scrollX, index)}</View> */}
+        <View style={styles.preview}>
+          <Canvas>
+            {getPreviewByKey(key, scrollX, index)}
+          </Canvas>
+        </View>
         <LinearGradient
           colors={[`${colors.lighterBlack}10`, colors.lighterBlack]}
           start={{x: 0, y: 0}}

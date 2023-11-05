@@ -1,20 +1,23 @@
+import colors from '@constants/colors';
 import {useFrame} from '@react-three/fiber/native';
 import {TextureLoader} from 'expo-three';
 import React, {FC, useEffect, useRef} from 'react';
 import {Group, SpotLight} from 'three';
-import * as THREE from 'three';
 
-const Scene: FC = () => {
+const Jupiter: FC = () => {
   const mesh = useRef<Group>(null);
   const light = useRef<SpotLight>(null);
 
-  const map = new TextureLoader().load(require('../../assets/textures/mars-diffuse.jpg'));
+  const map = new TextureLoader().load(require('./assets/textures/jupiter-diffuse.jpg'));
+
+  light.current?.lookAt(mesh.current?.position);
 
   useFrame(() => {
     if (mesh.current) {
       mesh.current.rotation.y = mesh.current.rotation.y += 0.001;
     }
   });
+
 
   useEffect(() => {
     if (mesh.current) {
@@ -23,25 +26,24 @@ const Scene: FC = () => {
   }, []);
 
   return (
-    <group position={[0.26, -0.02, 20.27]} scale={0.1}>
+    <group position={[-0.02, -0.02, 30.3]} scale={0.1}>
       <spotLight
         ref={light}
-        position={[-2, 0, -1]}
-        color="#fffacb"
-        intensity={3}
+        position={[-8, 0, -5]} 
+        color={colors.sun}
+        intensity={1}
         distance={100}
         angle={Math.PI / 4}
         penumbra={1}
-        decay={2}
       />
       <group ref={mesh}>
         <mesh scale={1.1}>
           <sphereGeometry args={[1, 50, 50]} />
-          <meshStandardMaterial map={map} roughness={1} metalness={0} />
+          <meshStandardMaterial map={map} />
         </mesh>
       </group>
     </group>
   );
 };
 
-export default Scene;
+export default Jupiter;

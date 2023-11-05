@@ -1,8 +1,7 @@
 import React, {FC, useEffect, useRef} from 'react';
 import {useFrame} from '@react-three/fiber/native';
-import {BufferGeometry, Material, Mesh, MeshStandardMaterial, NormalBufferAttributes} from 'three';
+import {BufferGeometry, Material, Mesh, NormalBufferAttributes} from 'three';
 import {SharedValue} from 'react-native-reanimated';
-import * as THREE from 'three';
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry';
 import {FontLoader} from 'three/examples/jsm/loaders/FontLoader';
 import fontAsset from './assets/fonts/helvetiker_regular.typeface.json';
@@ -19,7 +18,6 @@ interface IText {
 
 const Text: FC<IText> = ({isPressed, cursor}) => {
   const mesh = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[]>>(null);
-  const material = useRef<MeshStandardMaterial>(null);
   const textRef = useRef<TextGeometry>(null);
 
   const font = new FontLoader().parse(fontAsset);
@@ -40,10 +38,6 @@ const Text: FC<IText> = ({isPressed, cursor}) => {
       camera.position.y = -cursor.value.y * 10;
 
       camera.lookAt(mesh.current.position);
-
-      if (material.current) {
-        material.current.color = new THREE.Color(isPressed.value ? 'red' : '#FF00FF');
-      }
     }
   });
 

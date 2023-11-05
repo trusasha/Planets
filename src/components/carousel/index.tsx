@@ -18,7 +18,7 @@ const Carousel: FC<ICarousel> = ({data, additionalStyles, additionalContainerSty
   const [scrollX, onScroll] = useScrollAnimation();
 
   const renderItem: ListRenderItem<ILinkCard> = ({item, index}) => (
-    <Card scrollX={scrollX} index={index} item={item} />
+    <Card scrollX={scrollX} index={index} item={item} key={item.key} />
   );
 
   return (
