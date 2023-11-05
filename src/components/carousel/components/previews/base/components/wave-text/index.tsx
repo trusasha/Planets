@@ -49,48 +49,26 @@ const WaveText: FC<IWaveText> = ({
   const font = new FontLoader().parse(fontAsset);
   const matcap = new TextureLoader().load(require('../../assets/textures/matcap.png'));
 
-  const hookRefs = useWaveTextAnimation({text, delayPerLetter, restartDelay, rotationTime});
-
-  /**
-   * Pre-calculate letter geometries and positions for optimization
-   */
-  const letterGeometries = useMemo(() => {
-    return text.split('').map((letter) => {
-      const geometry = new TextGeometry(letter, {
-        font,
-        size: 4,
-        height: 0.5,
-      });
-      geometry.computeBoundingBox();
-      geometry.center();
-      return geometry;
-    });
-  }, [text, font]);
-
-  /**
-   * Calculate positions to center the text
-   */
-  const textWidth = useMemo(() => {
-    let totalWidth = 0;
-    return letterGeometries.map((geometry) => {
-      const letterWidth = geometry.boundingBox.max.x - geometry.boundingBox.min.x;
-      totalWidth += letterWidth + 1;
-      return totalWidth;
-    });
-  }, [letterGeometries]);
+  const {letterRefs, letterGeometries, letterWidth} = useWaveTextAnimation({
+    text,
+    delayPerLetter,
+    restartDelay,
+    rotationTime,
+    font,
+  });
 
   /**
    * Align text in the middle
    */
-  const middle = textWidth[textWidth.length - 1] / 2;
+  const middle = letterWidth[letterWidth.length - 1] / 2;
 
   return (
     <group position={position}>
       {text.split('').map((_, index) => (
         <mesh
           key={index}
-          position={[textWidth[index] - middle, 0, 0]}
-          ref={(el) => (hookRefs.current[index] = el)}
+          position={[letterWidth[index] - middle, 0, 0]}
+          ref={(el) => (letterRefs.current[index] = el)}
           geometry={letterGeometries[index]}
         >
           <meshMatcapMaterial matcap={matcap} />

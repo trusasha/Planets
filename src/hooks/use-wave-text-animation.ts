@@ -1,11 +1,14 @@
 import { useFrame } from "@react-three/fiber/native";
 import { useMemo, useRef } from "react";
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
+import { Font } from "three/examples/jsm/loaders/FontLoader";
 
 interface IUseWaveAnimation {
   text: string;
   delayPerLetter: number;
   rotationTime: number;
   restartDelay: number;
+  font: Font;
 }
 
 /**
@@ -14,15 +17,32 @@ interface IUseWaveAnimation {
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
 /**
- * This custom hook manages the wave animation for text. It calculates the rotation for each letter in the text
- * to create a wave effect. Letters will rotate in sequence with a delay, a set rotation time, and a defined 
- * pause before restarting the cycle.
- * 
- * @param {IUseWaveAnimation} props The hook accepts an object with text, delayPerLetter, rotationTime, and restartDelay.
- * @returns A ref array to be passed to the mesh components.
+ * `useWaveTextAnimation` is a custom hook designed to animate text with a wave effect in a 3D scene using Three.js.
+ * It controls the rotation of each letter in the provided text to create an animated wave effect.
+ * The animation sequence involves rotating each letter successively with a delay and a defined rotation time,
+ * followed by a restart delay before the animation cycle repeats.
+ *
+ * The hook makes use of the `useFrame` hook from `@react-three/fiber/native` to update the rotation
+ * in an animation loop, providing smooth and continuous wave-like motion.
+ *
+ * @param {IUseWaveAnimation} props - An object containing the properties required to configure the animation.
+ * @param {string} props.text - The string of text that will be animated.
+ * @param {number} props.delayPerLetter - The delay before the start of each letter's rotation, creating the sequential wave effect.
+ * @param {number} props.rotationTime - The duration each letter takes to complete one rotation.
+ * @param {number} props.restartDelay - The delay before the animation cycle restarts after completing a full wave sequence.
+ * @param {Font} props.font - The Three.js font used for the text geometry which is required for calculating letter rotations.
+ * @returns {object} - An object containing:
+ *   - `letterRefs` (React.MutableRefObject[]): A reference array pointing to each letter mesh in the text.
+ *   - `letterGeometries` (TextGeometry[]): Pre-calculated text geometries for each letter for optimization purposes.
+ *   - `letterWidth` (number[]): The computed width for each letter to help in aligning the text in the center.
+ *
+ * The hook encapsulates the complex logic for animating text in a wave pattern, ensuring ease of use
+ * in a 3D React environment. It manages the lifecycle of the animation, from calculating geometries and
+ * initial positions to updating rotations on each frame, and ensures the animation runs optimally by
+ * reducing unnecessary computations through memoization and useRef hooks.
  */
-const useWaveTextAnimation = ({ text, delayPerLetter, rotationTime, restartDelay }: IUseWaveAnimation) => {
-  const meshRefs = useRef([]);
+const useWaveTextAnimation = ({ text, delayPerLetter, rotationTime, restartDelay, font }: IUseWaveAnimation) => {
+  const letterRefs = useRef([]);
 
   /**
    * Setup the start times for each letter rotation
@@ -63,14 +83,14 @@ const useWaveTextAnimation = ({ text, delayPerLetter, rotationTime, restartDelay
       nextCycleStartTime.current =
         rotationStartTimes[rotationStartTimes.length - 1] + rotationTime + restartDelay;
 
-      meshRefs.current.forEach((mesh) => {
+      letterRefs.current.forEach((mesh) => {
         if (mesh) {
           mesh.rotation.x = 0;
         }
       });
     }
 
-    meshRefs.current.forEach((mesh, index) => {
+    letterRefs.current.forEach((mesh, index) => {
       if (mesh) {
         const startTime = rotationStartTimes[index];
         const localElapsedTime = elapsedTime - startTime;
@@ -120,7 +140,35 @@ const useWaveTextAnimation = ({ text, delayPerLetter, rotationTime, restartDelay
     });
   });
 
-  return meshRefs
+  /**
+ * Pre-calculate letter geometries and positions for optimization
+ */
+  const letterGeometries = useMemo(() => {
+    return text.split('').map((letter) => {
+      const geometry = new TextGeometry(letter, {
+        font,
+        size: 4,
+        height: 0.5,
+      });
+      geometry.computeBoundingBox();
+      geometry.center();
+      return geometry;
+    });
+  }, [text, font]);
+
+  /**
+* Calculate positions to center the text
+*/
+  const letterWidth = useMemo(() => {
+    let totalWidth = 0;
+    return letterGeometries.map((geometry) => {
+      const letterWidth = geometry.boundingBox.max.x - geometry.boundingBox.min.x;
+      totalWidth += letterWidth + 1;
+      return totalWidth;
+    });
+  }, [letterGeometries]);
+
+  return { letterRefs, letterGeometries, letterWidth }
 };
 
 export default useWaveTextAnimation
