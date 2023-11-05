@@ -1,6 +1,6 @@
-import AdvancedTechniques from '@components/carousel/previews/advanced-techniques';
-import Base from '@components/carousel/previews/base';
-import BasicTechniques from '@components/carousel/previews/basic-techniques';
+import AdvancedTechniques from '@components/carousel/components/previews/advanced-techniques';
+import Base from '@components/carousel/components/previews/base';
+import BasicTechniques from '@components/carousel/components/previews/basic-techniques';
 import {ILinkCard, LinkCardKey} from '@screens/main/links';
 import React from 'react';
 import {SharedValue} from 'react-native-reanimated';

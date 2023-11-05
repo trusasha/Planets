@@ -21,7 +21,7 @@ import Card from '@screens/card';
 const Stack = createNativeStackNavigator<TScreensParams>();
 
 const MainStack = () => (
-  <Stack.Navigator initialRouteName={screens.main} screenOptions={{headerShown: false}}>
+  <Stack.Navigator initialRouteName={screens.main} screenOptions={{headerShown: false, animation: 'fade'}}>
     <Stack.Screen name={screens.main} component={Main} />
     <Stack.Screen name={screens.card} component={Card}/>
     <Stack.Screen name={screens.lesson1} component={Lesson1} />

@@ -1,7 +1,7 @@
 import {useFrame} from '@react-three/fiber';
 import React, {FC} from 'react';
 import {SharedValue, interpolate} from 'react-native-reanimated';
-import {FULL_SIZE} from '../components/card/styles';
+import {FULL_SIZE} from '../card/styles';
 import Background from './components/background';
 import Earth from './components/planets/earth';
 import Jupiter from './components/planets/jupiter';

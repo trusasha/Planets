@@ -6,7 +6,7 @@ import useScrollAnimation from '@hooks/use-scroll-animation';
 import Card from './components/card';
 import {FULL_SIZE} from './components/card/styles';
 import {ILinkCard} from '@screens/main/links';
-import Header from './header';
+import Header from './components/header';
 
 interface ICarousel {
   data: ILinkCard[];
