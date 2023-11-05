@@ -24,7 +24,7 @@ const ShoeOBJ = () => {
   }, [])
 
   return (
-    <mesh scale={10}>
+    <mesh scale={1} position={[0, 0, -1]} rotation={[0, Math.PI / 2 ,0]}>
       <primitive object={obj} />
     </mesh>
   );

@@ -10,7 +10,7 @@ const BurgerOBJ = () => {
   }
 
   return (
-    <mesh>
+    <mesh position={[0, -2, -15]} scale={0.2}>
       <primitive object={group} />
     </mesh>
   );

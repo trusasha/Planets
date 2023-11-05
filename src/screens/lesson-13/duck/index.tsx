@@ -17,7 +17,7 @@ const DuckGLB = () => {
   ]);
 
   return (
-    <mesh scale={[10, 10, 10]} receiveShadow>
+    <mesh scale={[0, 0, -10]} receiveShadow>
       <primitive object={scene} />
     </mesh>
   );

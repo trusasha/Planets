@@ -27,7 +27,7 @@ const ButtonGroup: FC<IButtonGroup> = ({options, onSelect, selectedOption, addit
       bounces={false}
     >
       {options.map((option) => {
-        const isSelected = selectedOption?.value === option.value
+        const isSelected = selectedOption?.value === option.value;
 
         return (
           <Button
@@ -36,7 +36,7 @@ const ButtonGroup: FC<IButtonGroup> = ({options, onSelect, selectedOption, addit
             onPress={() => onSelect(option)}
             additionalStyles={[styles.button, isSelected && styles.buttonSelected]}
           />
-        )
+        );
       })}
     </ScrollView>
   );

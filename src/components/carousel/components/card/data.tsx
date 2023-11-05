@@ -7,10 +7,10 @@ import {SharedValue} from 'react-native-reanimated';
 
 const getPreviewByKey = (type: ILinkCard['key'], scrollX: SharedValue<number>, index: number) => {
   switch (type) {
-    case LinkCardKey.base:
-      return <Base />;
-    case LinkCardKey.baseTechnics:
-      return <BasicTechniques />;
+    // case LinkCardKey.base:
+    //   return <Base />;
+    // case LinkCardKey.baseTechnics:
+    //   return <BasicTechniques />;
     // case LinkCardKey.advancedTechnics:
     //   return <AdvancedTechniques />;
 

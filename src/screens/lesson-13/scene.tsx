@@ -1,18 +1,34 @@
 import React, {FC} from 'react';
 import ShoeOBJ from './shoe';
-import DuckGLB from './duck';
+// import DuckGLB from './duck';
 import BurgerOBJ from './burger';
-import IcebearGLB from './icebear';
+// import IcebearGLB from './icebear';
 
-const Scene: FC = () => (
+const getExample = (value: string) => {
+  switch (value) {
+    case 'nike':
+      return <ShoeOBJ />;
+    // case 'duck':
+    //   return <DuckGLB />;
+    // case 'bear':
+    //   return <IcebearGLB />;
+    case 'burger':
+      return <BurgerOBJ />;
+    default:
+      return null;
+  }
+};
+
+interface IScene {
+  currentExample: string;
+}
+
+const Scene: FC<IScene> = ({currentExample}) => (
   <>
     <ambientLight intensity={1} />
     <directionalLight position={[1, 1, 0]} intensity={1} />
 
-    <BurgerOBJ />
-    {/* <DuckGLB /> */}
-    {/* <ShoeOBJ /> */}
-    {/* <IcebearGLB /> */}
+    {getExample(currentExample)}
   </>
 );
 

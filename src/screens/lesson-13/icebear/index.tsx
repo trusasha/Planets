@@ -10,9 +10,9 @@ const Icebear = () => {
   }
 
   return (
-    <mesh scale={[10, 10, 10]} receiveShadow>
+    <group position={[0, 0, -10]} receiveShadow>
       <primitive object={scene} />
-    </mesh>
+    </group>
   );
 };
 
