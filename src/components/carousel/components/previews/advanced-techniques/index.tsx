@@ -1,8 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {BufferGeometry, Material, Mesh, NormalBufferAttributes} from 'three';
 import * as THREE from 'three';
-import shader from './shader';
+import {bottomShader, shader} from './shader';
 import {useFrame} from '@react-three/fiber/native';
+import colors from '@constants/colors';
 
 const fieldSize = 3;
 const numPlanes = 5;
@@ -11,7 +11,6 @@ const AdvancedTechniques = () => {
   const planes = useRef([]);
   const [planeGeometries, setPlaneGeometries] = useState([]);
 
-  // Создаём геометрию плоскостей и сохраняем в состоянии
   useEffect(() => {
     setPlaneGeometries(
       new Array(numPlanes).fill('').map(() => {
@@ -34,10 +33,8 @@ const AdvancedTechniques = () => {
       const plane = planes.current[i];
 
       if (plane) {
-        // Двигаем каждую плоскость
-        plane.position.y -= 0.05;
+        plane.position.y -= 0.01;
 
-        // Проверяем, прошла ли плоскость точку, где её надо переместить в конец
         if (plane.position.y < -fieldSize * 5) {
           plane.position.y += fieldSize * 10 * numPlanes;
         }
@@ -47,31 +44,34 @@ const AdvancedTechniques = () => {
 
   return (
     <group position={[0, -10, 1]} scale={4} rotation={[-Math.PI / 2, 0, 0]}>
+      <mesh position={[0, 100, 0]} scale={50}>
+        <sphereGeometry args={[1, 64, 64]} />
+        <meshBasicMaterial color={'#ffc700'} />
+      </mesh>
       {planeGeometries.map((geometry, idx) => (
-        <mesh
+        <group
           key={idx}
           ref={(ref) => (planes.current[idx] = ref)}
           position={[0, idx * fieldSize * 10 - fieldSize * 5, 1]}
-          scale={4}
-          geometry={geometry}
         >
-          <rawShaderMaterial
-            transparent
-            wireframe
-            vertexShader={shader.vertex}
-            fragmentShader={shader.fragment}
-          />
-        </mesh>
+          <mesh key={`top-${idx}`} scale={4} geometry={geometry}>
+            <rawShaderMaterial
+              transparent
+              wireframe
+              vertexShader={shader.vertex}
+              fragmentShader={shader.fragment}
+            />
+          </mesh>
+          <mesh key={`bottom-${idx}`} scale={4} position={[0, 0, -0.01]} geometry={geometry}>
+            <rawShaderMaterial
+              transparent
+              vertexShader={bottomShader.vertex}
+              fragmentShader={bottomShader.fragment}
+              uniforms={{color: {value: new THREE.Color(colors.background)}}}
+            />
+          </mesh>
+        </group>
       ))}
-      {/* <mesh ref={object}>
-        <planeGeometry ref={geometry} args={[fieldSize, fieldSize * 10, 32, 32 * 10]} />
-        <rawShaderMaterial
-          transparent
-          wireframe
-          vertexShader={shader.vertex}
-          fragmentShader={shader.fragment}
-        />
-      </mesh> */}
     </group>
   );
 };
