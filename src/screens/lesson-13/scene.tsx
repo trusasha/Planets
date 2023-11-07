@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import ShoeOBJ from './shoe';
 // import DuckGLB from './duck';
 import BurgerOBJ from './burger';
+// import Solider from './solider';
 // import IcebearGLB from './icebear';
 
 const getExample = (value: string) => {
@@ -14,6 +15,8 @@ const getExample = (value: string) => {
     //   return <IcebearGLB />;
     case 'burger':
       return <BurgerOBJ />;
+    // case 'solider':
+    //   return <Solider />;
     default:
       return null;
   }

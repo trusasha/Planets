@@ -17,6 +17,10 @@ const options: IButtonGroupOption[] = [
     value: 'burger',
   },
   // {
+  //   label: 'Solider animated (.glb)',
+  //   value: 'solider',
+  // },
+  // {
   //   label: 'Duck (.glb)',
   //   value: 'duck',
   // },
