@@ -2,7 +2,7 @@ import useModelLoader from '@hooks/use-model-loader';
 import React, { useRef } from 'react';
 import ufoObj from './assets/models/ufo';
 import { Group } from 'three';
-import { useFrame } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber/native';
 import colors from '@constants/colors';
 import RingOfLights from './components/ring-of-lights';
 
@@ -23,7 +23,7 @@ const BasicTechniques = () => {
 
   return (
     <group rotation={[Math.PI / 4, 0, 0]}>
-      <ambientLight intensity={2} />
+      <ambientLight intensity={3} />
       <group ref={object}>
         <mesh position={[-0.2, 2, 0]} scale={0.6} rotation={[Math.PI, 0, 0]}>
           <primitive object={group} />

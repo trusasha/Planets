@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {StyleSheet} from 'react-native';
-import {Canvas} from '@react-three/fiber';
+import {Canvas} from '@react-three/fiber/native';
 import {TScreenProps} from '@navigation/constants';
 import Header from '@components/header';
 

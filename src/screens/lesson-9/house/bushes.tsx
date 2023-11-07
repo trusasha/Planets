@@ -1,6 +1,6 @@
 import React from 'react';
 import * as THREE from 'three';
-import {Vector3} from '@react-three/fiber';
+import {Vector3} from '@react-three/fiber/native';
 
 interface IBushes {
   scale: Vector3;

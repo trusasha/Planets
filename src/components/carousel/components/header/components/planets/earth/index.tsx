@@ -31,7 +31,7 @@ const Earth: FC = () => {
       <spotLight
         position={[-0.5, -0.2, 2]}
         color={colors.sun}
-        intensity={6}
+        intensity={1}
         distance={100}
         angle={Math.PI / 4}
         penumbra={1}

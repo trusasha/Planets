@@ -27,7 +27,7 @@ const Mars: FC = () => {
         ref={light}
         position={[-2, 0, -1]}
         color="#fffacb"
-        intensity={3}
+        intensity={0.3}
         distance={100}
         angle={Math.PI / 4}
         penumbra={1}

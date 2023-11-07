@@ -24,9 +24,9 @@ const Scene: FC<IScene> = ({scrollX}) => {
     <>
       <Background />
 
-      {/* <Earth />
+      <Earth />
       <Mars />
-      <Jupiter /> */}
+      <Jupiter />
     </>
   );
 };

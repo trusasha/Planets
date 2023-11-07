@@ -18,9 +18,9 @@ const RingOfLights: React.FC<IRingOfSpheres> = ({count, radius, position}) => {
         key={index}
         color={'#00edfc'}
         position={[x, y, z]}
-        angle={Math.PI / 10}
+        angle={Math.PI / 3}
         penumbra={1}
-        intensity={5}
+        intensity={500}
         castShadow
       />
     );
