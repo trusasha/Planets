@@ -2,10 +2,11 @@ import colors from '@constants/colors';
 import {useFrame} from '@react-three/fiber/native';
 import {TextureLoader} from 'expo-three';
 import React, {FC, useRef} from 'react';
-import {Group, SpotLight} from 'three';
+import {BufferGeometry, Group, Material, Mesh, NormalBufferAttributes, SpotLight} from 'three';
 
 const Earth: FC = () => {
   const mesh = useRef<Group>(null);
+  const cloudsRef = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[]>>(null);
   const light = useRef<SpotLight>(null);
 
   const map = new TextureLoader().load(require('./assets/textures/earth-diffuse.jpg'));
@@ -23,6 +24,8 @@ const Earth: FC = () => {
   useFrame(() => {
     if (mesh.current) {
       mesh.current.rotation.y = mesh.current.rotation.y += 0.001;
+
+      cloudsRef.current.rotation.y = cloudsRef.current.rotation.y += 0.0002;
     }
   });
 
@@ -31,7 +34,7 @@ const Earth: FC = () => {
       <spotLight
         position={[-0.5, -0.2, 2]}
         color={colors.sun}
-        intensity={1}
+        intensity={3}
         distance={100}
         angle={Math.PI / 4}
         penumbra={1}
@@ -39,9 +42,9 @@ const Earth: FC = () => {
       <group ref={mesh}>
         <mesh scale={1.1}>
           <sphereGeometry args={[1, 50, 50]} />
-          <meshStandardMaterial map={map} normalMap={normal} roughnessMap={glossiness} />
+          <meshStandardMaterial map={map} normalMap={normal} roughness={0.5} roughnessMap={glossiness} />
         </mesh>
-        <mesh scale={1.11}>
+        <mesh scale={1.11} ref={cloudsRef}>
           <sphereGeometry args={[1, 50, 50]} />
           <meshStandardMaterial alphaMap={clouds} transparent color={'white'} />
         </mesh>
