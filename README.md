@@ -7,6 +7,8 @@
 1. `npm install --force`
 2. `expo run:ios`
 
+**Requires a real device to run**
+
 ## Content
 1. [Introduction](src/screens/lesson-1)
 2. [Positioning](src/screens/lesson-2)
