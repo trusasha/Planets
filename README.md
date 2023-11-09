@@ -2,6 +2,8 @@
 
 ![Preview](gif/main.gif)
 
+A collection of examples and techniques for working with three.js in react-native
+
 **Launching the application**
 
 1. `npm install --force`
